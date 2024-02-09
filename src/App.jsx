@@ -1,10 +1,11 @@
-function App() {
+import Title from "./components/ui/Title";
 
+function App() {
   return (
     <>
-      <h1 className="text-5xl">Vitamins  & Supplements</h1>
+      <Title size="lg">Vitamins & Supplements</Title>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
