@@ -1,9 +1,9 @@
-import Title from "./components/ui/Title";
+import Hero from "./components/Hero";
 
 function App() {
   return (
     <>
-      <Title size="lg" className="mt-24">Vitamins & Supplements</Title>
+      <Hero />
     </>
   );
 }
