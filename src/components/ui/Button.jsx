@@ -1,7 +1,17 @@
-export default function Button({ children, className, onClick, icon }) {
+export default function Button({
+  children,
+  className,
+  onClick,
+  icon,
+  color = "brand",
+}) {
   return (
     <button
-      className={`bg-brand border border-brand hover:bg-transparent hover:text-darkest hover:dark:text-white transition-colors duration-300 px-14 py-2.5 rounded-full inline-flex items-center justify-center text-white font-medium group ${className}`}
+      className={`bg-${color} border border-${color} hover:bg-transparent ${
+        color === "brand"
+          ? "text-white hover:text-darkest hover:dark:text-white"
+          : "text-darkest hover:text-white hover:dark:text-white"
+      } transition-colors duration-300 px-14 py-2.5 rounded-full flex items-center justify-center font-medium shadow-lg group ${className}`}
       onClick={onClick}
     >
       {!icon ? (
