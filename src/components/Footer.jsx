@@ -88,7 +88,7 @@ export default function Footer() {
           </ul>
         </div>
       </footer>
-      <div className="container mt-6 flex items-center justify-between">
+      <div className="container mt-6 mb-5 flex items-center justify-between">
         <Text className="text-mid flex items-center gap-2">Built by <a href="https://sonatipek.com" target="_blank"><img src={SonatLogo} alt="sonat saygin ipek logo" /></a></Text>
 
         <Text type="subtext">Vitamins and Supplements is <Link href="https://github.com/sonatipek/vitamins-and-supplements-frontend/blob/main/LICENSE" target="_blank">MIT licensed</Link></Text>
