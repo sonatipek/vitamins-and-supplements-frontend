@@ -1,3 +1,4 @@
+import Features from "./components/Features";
 import Hero from "./components/Hero";
 import Paragraph from "./components/Paragraph";
 
@@ -14,6 +15,8 @@ function App() {
         title="Neden Kullanmalısın ?"
         description="Sağlıklı bir yaşam tarzı sürdürmek ve zindelikten maksimum düzeyde faydalanmak için doğru beslenmemiz gerekir. Bunun için de günlük aktivitenize veya spor alışkanlıklarınıza göre ek takviyelere ihtiyaç duyabiliriz. Ancak bu ek takviyelere ne kadar ihtiyacınız var? Bu ek takviyeler sizin durumunuz için gerçekten faydalı mı? İşte tam bu noktada, sizin için ihtiyacınız olabilecek supplementleri, birbirini tekrar eden kopya içerikli “pazarlama içerikleri”nden, kâr amacı ile takviyeyi öven içeriklerden uzak bir şekilde kendiniz keşfetmenize olanak tanımak istiyoruz. "
       />
+      
+      <Features />
     </>
   );
 }
