@@ -30,7 +30,7 @@ const projectLinks = [
 export default function Footer() {
   return (
     <>
-      <footer className="container mt-28 flex items-start justify-between border-y-2 py-6">
+      <footer className="container mt-52 flex items-start justify-between border-y-2 py-6">
         <div className="w-1/3">
           <a href="/">
             <img
