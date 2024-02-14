@@ -33,7 +33,7 @@ export default function Navbar() {
           <h1 className="hidden">Vitamins & Supplements</h1>
         </a>
         <button
-          className="inline md:hidden absolute right-10 top-10"
+          className="inline md:hidden text-darkest dark:text-white absolute right-10 top-10 "
           onClick={menuButtonHandler}
         >
           {isMenuOpen ? <X /> : <MenuIcon />}
