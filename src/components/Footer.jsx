@@ -30,8 +30,8 @@ const projectLinks = [
 export default function Footer() {
   return (
     <>
-      <footer className="container mt-52 flex items-start justify-between border-y-2 py-6">
-        <div className="w-1/3">
+      <footer className="container mt-24 md:mt-52 flex flex-col md:flex-row items-start justify-between border-y-2 py-6 px-4 md:px-0">
+        <div className="w-3/3 md:w-1/3 mb-7 md:mb-0">
           <a href="/">
             <img
               src={BrandLogo}
@@ -46,7 +46,7 @@ export default function Footer() {
           </Text>
         </div>
 
-        <div className="flex gap-14">
+        <div className="flex flex-col md:flex-row gap-10 md:gap-12 lg:gap-14">
           <ul className="*:text-light">
             <h6 className="font-bold !text-mid mb-2">Sayfalar</h6>
             {navLinks.map((value, index) => (
@@ -88,7 +88,7 @@ export default function Footer() {
           </ul>
         </div>
       </footer>
-      <div className="container mt-6 mb-5 flex items-center justify-between">
+      <div className="container mt-6 mb-5 flex flex-col md:flex-row items-center justify-between">
         <Text className="text-mid flex items-center gap-2">Built by <a href="https://sonatipek.com" target="_blank"><img src={SonatLogo} alt="sonat saygin ipek logo" /></a></Text>
 
         <Text type="subtext">Vitamins and Supplements is <Link href="https://github.com/sonatipek/vitamins-and-supplements-frontend/blob/main/LICENSE" target="_blank">MIT licensed</Link></Text>
