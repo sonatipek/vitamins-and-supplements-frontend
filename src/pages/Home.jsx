@@ -1,9 +1,9 @@
-import Features from "./components/Features";
-import Hero from "./components/Hero";
-import Paragraph from "./components/Paragraph";
-import List from "./components/ui/List";
+import Features from "../components/Features";
+import Hero from "../components/Hero";
+import Paragraph from "../components/Paragraph";
+import List from "../components/ui/List";
 
-function App() {
+function Home() {
   return (
     <>
       <Hero />
@@ -28,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

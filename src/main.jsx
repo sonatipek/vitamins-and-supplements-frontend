@@ -1,17 +1,40 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import "./index.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer.jsx";
-import {ThemeProvider} from "./contexts/ThemeContext.jsx";
+
+import MainLayout from "./layouts/MainLayout.jsx";
+
+import Home from "./pages/Home.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
+import Supplements from "./pages/Supplements.jsx";
+import ProjectAbout from "./pages/ProjectAbout.jsx";
+
+
+import { ThemeProvider } from "./contexts/ThemeContext.jsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "/", element: <Home /> },
+      {
+        path: "/supplements",
+        element: <Supplements />,
+        // loader: Loader
+      },
+      { path: "/project-about", element: <ProjectAbout /> },
+    ],
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider>
-      <Navbar />
-      <App />
-      <Footer />
+      <RouterProvider router={router} />
     </ThemeProvider>
   </React.StrictMode>
 );
