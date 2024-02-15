@@ -9,8 +9,9 @@ import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 const navLinks = [
-  { title: "Supplementler", href: "#" },
-  { title: "Geliştiriciler İçin/Proje Hakkında", href: "#" },
+  { title: "Ana Sayfa", href: "/" },
+  { title: "Supplementler", href: "/supplements" },
+  { title: "Geliştiriciler İçin/Proje Hakkında", href: "/project-about" },
 ];
 
 const contactLinks = [
