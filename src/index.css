@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active {
+  @apply underline underline-offset-4 decoration-brand decoration-2;
+}   

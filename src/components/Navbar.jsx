@@ -1,6 +1,9 @@
-import { Github, MenuIcon, Moon, Sun, X } from "lucide-react";
-import BrandLogo from "../assets/brand_logo.svg";
 import { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { Github, MenuIcon, Moon, Sun, X } from "lucide-react";
+
+import BrandLogo from "../assets/brand_logo.svg";
+
 import { ThemeContext } from "../contexts/ThemeContext";
 
 export default function Navbar() {
@@ -48,9 +51,9 @@ export default function Navbar() {
           {navLinks.map((value, index) => (
             <li
               key={index}
-              className="text-darkest hover:underline font-medium dark:text-white"
+              className="text-darkest underline-offset-4 decoration-brand decoration-2 hover:underline font-medium dark:text-white"
             >
-              <a href={value.href}>{value.title}</a>
+              <NavLink to={value.href}>{value.title}</NavLink>
             </li>
           ))}
         </ul>
