@@ -32,7 +32,7 @@ export function Supplements() {
         <button type="submit" className="border rounded-r-md border-darkest bg-darkest dark:bg-white dark:border-white px-6 py-3 bg-transparent text-white dark:text-darkest font-medium">Ara</button>
       </form>
       <Tab.Group>
-        <Tab.List className="border-b border-light dark:border-dark flex gap-5">
+        <Tab.List className="border-b border-light dark:border-dark flex gap-5 overflow-x-auto">
           {tabs.map((value, index) => (
             <Tab key={index} as={Fragment}>
               {({ selected }) => (
