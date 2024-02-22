@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import { Outlet } from "react-router-dom";
 
 // Components
@@ -14,6 +15,7 @@ export default function MainLayout() {
       </main>
 
       <Footer />
+      <Analytics />
     </>
   );
 }
