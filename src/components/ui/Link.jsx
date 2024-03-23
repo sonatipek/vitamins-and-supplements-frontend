@@ -6,9 +6,11 @@ export default function Link({
   type,
   target,
   color = "brand",
+  onClick,
 }) {
   return (
     <a
+      onClick={onClick}
       href={href}
       target={!target ? "_self" : target}
       className={`inline-flex justify-center items-center group ${
