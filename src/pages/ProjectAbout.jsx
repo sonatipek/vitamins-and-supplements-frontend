@@ -6,14 +6,17 @@ import PreviewCard from "../components/ui/PreviewCard";
 
 // Images
 import ExpressLogo from "../assets/express_logo.svg";
+import ExpressLogoDark from "../assets/expressjs_dark.svg";
 import FigmaLogo from "../assets/figma_logo.svg";
 import FramerLogo from "../assets/framer_logo.svg";
+import FramerLogoDark from "../assets/framer_dark.svg";
 import MongoLogo from "../assets/mongo_logo.svg";
 import NodeLogo from "../assets/nodejs_logo.svg";
 import ReactLogo from "../assets/react_logo.svg";
 import ReactRouterLogo from "../assets/reactrouter_logo.svg";
 import TailwindLogo from "../assets/tailwind_logo.svg";
 import VercelLogo from "../assets/vercel_logo.svg";
+import VercelLogoDark from "../assets/vercel_dark.svg";
 import ViteLogo from "../assets/vite_logo.svg";
 
 import {
@@ -24,9 +27,15 @@ import {
   TwitterIcon,
 } from "lucide-react";
 
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
+
 export default function ProjectAbout() {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <main className="container mt-28">
+      {/* Left Navigation */}
       <div className="hidden lg:flex fixed right-4">
         <ul className="space-y-4">
           <li className="group">
@@ -90,6 +99,7 @@ export default function ProjectAbout() {
           </li>
         </ul>
       </div>
+      {/* Left Navigation End */}
 
       {/* Main Informations */}
       <section id="supplements-and-vitamins">
@@ -167,7 +177,7 @@ export default function ProjectAbout() {
               />
 
               <img
-                src={FramerLogo}
+                src={theme === "light" ? FramerLogo : FramerLogoDark}
                 alt="framer logo"
                 className="cursor-pointer hover:scale-105 duration-700 h-14"
               />
@@ -190,7 +200,7 @@ export default function ProjectAbout() {
               />
 
               <img
-                src={ExpressLogo}
+                src={theme === "light" ? ExpressLogo : ExpressLogoDark}
                 alt="express.js logo"
                 className="cursor-pointer hover:scale-105 duration-700 h-14"
               />
@@ -207,7 +217,7 @@ export default function ProjectAbout() {
             <Title className="text-center">Hosting</Title>
             <PreviewCard className="grid grid-cols-5 items-center justify-center gap-6">
               <img
-                src={VercelLogo}
+                src={theme === "light" ? VercelLogo : VercelLogoDark}
                 alt="vercel logo"
                 className="cursor-pointer hover:scale-105 duration-700 h-14"
               />
@@ -316,7 +326,7 @@ export default function ProjectAbout() {
         <Title size="lg">Kaynak & Referanslar</Title>
 
         <ul className="list-disc ml-6 mt-4 space-y-3">
-          <li>
+          <li className="dark:text-light">
             <Link
               href="https://www.youtube.com/watch?v=z3LFfY3AhVQ"
               target="_blank"
@@ -327,28 +337,28 @@ export default function ProjectAbout() {
             puanlandırmayı, modal tasarımını referans aldığım video içeriğine
             aşağıdaki linkten veya yandaki kısımdan ulaşabilirsiniz.
           </li>
-          <li>
+          <li className="dark:text-light">
             <Link href="https://undraw.co/illustrations" target="_blank">
               Undraw:
             </Link>{" "}
             Çeşitli illüstrasyonlar bulabileceğiniz web sitesi. Projede bulunan
             illüstrasyonu buradan edindim.
           </li>
-          <li>
+          <li className="dark:text-light">
             <Link href="https://www.svghub.app/" target="_blank">
               SVG Hub:
             </Link>{" "}
             Hareketli, hareketsiz SVG çizimler bulabileceğniz web sitesi. Hero
             alanında bulunan SVG çizimleri buradan edindim.
           </li>
-          <li>
+          <li className="dark:text-light">
             <Link href="https://svgl.vercel.app/" target="_blank">
               svgl:
             </Link>{" "}
             Çeşitli yazılımların, araçların, frameworklerin veya programlama
             dillerinin logolarının SVG olarak bulunduğu site.
           </li>
-          <li>
+          <li className="dark:text-light">
             <Link href="https://lucide.dev/" target="_blank">
               Lucide:
             </Link>{" "}

@@ -23,7 +23,16 @@ function Home() {
         title="Kimlere Yönelik"
         description="Başlıca aşağıdaki grubu içerse de tek seferlik takviye kullanmak zorunda kalan, bir probleme çözüm arayan herkese yöneliktir."
       />
-      <List listElements={["Sporcular", "Beslenme ve takviyeler hakkında bilgi edinmek isteyenler", "Sağlık bilinci yüksek bireyler", "Dengeli beslenme alışkanlıklarını geliştirmek isteyenler"]}/>
+      <div className="container">
+        <List
+          listElements={[
+            "Sporcular",
+            "Beslenme ve takviyeler hakkında bilgi edinmek isteyenler",
+            "Sağlık bilinci yüksek bireyler",
+            "Dengeli beslenme alışkanlıklarını geliştirmek isteyenler",
+          ]}
+        />
+      </div>
     </>
   );
 }

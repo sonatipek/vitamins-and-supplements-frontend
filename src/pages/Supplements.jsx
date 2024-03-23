@@ -29,7 +29,7 @@ export function Supplements() {
           className="border rounded-l-md border-darkest dark:border-white px-6 py-3 w-full bg-transparent text-darkest dark:text-white placeholder:text-mid focus:ring-0 focus:outline-none"
           placeholder="Supplement Ara"
         />
-        <button type="submit" className="border rounded-r-md border-darkest bg-darkest dark:bg-white dark:border-white px-6 py-3 bg-transparent text-white dark:text-darkest font-medium">Ara</button>
+        <button type="submit" className="border rounded-r-md border-darkest bg-white dark:border-white px-6 py-3 bg-transparent text-dark font-medium">Ara</button>
       </form>
       <Tab.Group>
         <Tab.List className="border-b border-light dark:border-dark flex gap-5 overflow-x-auto">
