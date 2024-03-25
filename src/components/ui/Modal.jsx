@@ -4,82 +4,101 @@ import Title from "./Title";
 import Text from "./Text";
 import Rating from "./Rating";
 
-export default function Modal({
-  supplement,
-  onClick,
-}) {
+import { Dialog } from "@headlessui/react";
+
+export default function Modal({ supplement, setIsOpen, isOpen }) {
   return (
-    <div className="fixed top-0 pt-[15svh] left-0 flex justify-center mx-auto w-screen h-screen z-50 backdrop-blur-sm backdrop-brightness-50 px-10 sm:px-24 md:px-48 lg:px-64 bg-transparent">
-      <div className="p-6 shadow-lg rounded-xl z-50 bg-white w-full mx-auto xl:w-1/3 h-fit">
-        {/* head */}
-        <div className="flex justify-between items-start mb-4">
-          <Title size="lg">{supplement.name}</Title>
-          <button onClick={onClick}>
-            <XIcon />
-          </button>
-        </div>
-        {/* head end */}
+    <Dialog
+      open={isOpen === supplement.name}
+      onClose={() => setIsOpen(false)}
+      className="relative z-50"
+    >
+      {/* The backdrop, rendered as a fixed sibling to the panel container */}
+      <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
-        <Rating className="mb-3" rate={supplement.rating} />
-
-        <Badge>{supplement.recommendation}</Badge>
-
-        <ul className="w-full bg-light rounded-md p-2 mt-3">
-          {supplement.tags.map((value, index) => (
-            <li key={index}>{value}</li>
-          ))}
-        </ul>
-
-        <div className="w-full flex mt-3">
-          <div className="w-full bg-brand p-2 text-white">
-            <h5 className="text-white">Faydaları</h5>
-            <ul>
-              {supplement.benefits.map((value, index) => (
-                <li key={index}>{value}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="w-full bg-light p-2">
-            <h5 className="">Kim Kullanmalı?</h5>
-            <ul>
-              {supplement.whoShouldUse.map((value, index) => (
-                <li key={index}>{value}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 mt-2 gap-3 md:gap-12">
-          <div className="py-2 px-4 shadow flex items-center gap-2 w-full">
-            <PillIcon />
-            <div>
-              <Title>Doz</Title>
-              <Text type="subtext">{supplement.dose}</Text>
+      {/* Full-screen scrollable container */}
+      <div className="fixed inset-0 w-screen overflow-y-auto">
+        {/* Container to center the panel */}
+        <div className="flex min-h-full items-center justify-center p-3">
+          <Dialog.Panel className="w-full max-w-md bg-white dark:bg-dark py-6 shadow-lg rounded-xl ">
+            {/* head */}
+            <div className="flex justify-between items-center mb-4 px-6">
+              <Title size="lg">{supplement.name}</Title>
+              <button onClick={() => setIsOpen(false)}>
+                <XIcon size={32} className="dark:text-light" />
+              </button>
             </div>
-          </div>
-          <div className="py-2 px-4 shadow flex items-center gap-2">
-            <Clock10Icon />
-            <div>
-              <Title>Zamanlama</Title>
-              <Text type="subtext">{supplement.timing}</Text>
-            </div>
-          </div>
-        </div>
+            {/* head end */}
+            <div className="px-6">
+              <Rating className="mb-4" rate={supplement.rating} />
 
-        {/* footer */}
-        <div className="border-t mt-10 pt-3">
-          <h6>Öneriler</h6>
-          <ul className="list-disc">
-            {supplement.suggestions.map((value, index) => (
-              <li key={index} className="ml-6">
-                {value}
-              </li>
-            ))}
-          </ul>
+              <Badge>{supplement.recommendation}</Badge>
+
+              <ul className="w-full bg-light rounded-md mt-3 flex justify-center items-center list-['+'] gap-7 py-5">
+                {supplement.tags.map((value, index) => (
+                  <li key={index} className="font-medium">
+                    {value}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="w-full flex mt-3">
+              <div className="w-full bg-brand p-2 text-white">
+                <h5 className="text-white font-bold">Faydaları</h5>
+
+                <ul className="list-disc ml-3 md:ml-6 mt-2">
+                  {supplement.benefits.map((value, index) => (
+                    <li key={index}>{value}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="w-full bg-light p-2">
+                <h5 className="font-bold">Kim Kullanmalı?</h5>
+
+                <ul className="list-disc ml-3 md:ml-5 mt-2">
+                  {supplement.whoShouldUse.map((value, index) => (
+                    <li key={index}>{value}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 mt-2 gap-3 md:gap-12 px-6">
+              <div className="py-2 px-4 shadow flex items-center gap-2 w-full dark:shadow-sm dark:shadow-darkest">
+                <PillIcon className="text-brand" />
+                <div>
+                  <Title>Doz</Title>
+                  <Text type="subtext">{supplement.dose}</Text>
+                </div>
+              </div>
+              <div className="py-2 px-4 shadow flex items-center gap-2 dark:shadow-sm dark:shadow-darkest">
+                <Clock10Icon className="text-brand" />
+                <div>
+                  <Title>Zamanlama</Title>
+                  <Text type="subtext">{supplement.timing}</Text>
+                </div>
+              </div>
+            </div>
+            {/* footer */}
+            <div className="border-t mt-10 pt-3 px-3 md:px-6 dark:border-mid">
+              <Title size="md" className="font-medium">
+                Öneriler
+              </Title>
+
+              <ul className="list-disc">
+                {supplement.suggestions.map((value, index) => (
+                  <li key={index} className="ml-6 dark:text-light">
+                    {value}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* footer end */}
+          </Dialog.Panel>
         </div>
-        {/* footer end */}
       </div>
-    </div>
+    </Dialog>
   );
 }

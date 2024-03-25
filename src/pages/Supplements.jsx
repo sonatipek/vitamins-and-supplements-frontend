@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useLoaderData } from "react-router-dom";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
 import { PillIcon, GlassWaterIcon, ListIcon } from "lucide-react";
 
@@ -21,6 +21,30 @@ const tabs = [
 export function Supplements() {
   const supplements = useLoaderData();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      "https://vitamins-and-supplements.vercel.app/api/category/supplements",
+      {
+        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
+      }
+    )
+      .then((response) => response.json())
+      .then((json) => setCategories(json));
+  }, []);
+  
+  useEffect(() => {
+    fetch(
+      "https://vitamins-and-supplements.vercel.app/api/category/supplements",
+      {
+        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
+      }
+    )
+      .then((response) => response.json())
+      .then((json) => setCategories(json));
+  }, []);
+
   return (
     <section className="container">
       <form action="#" className="flex items-center justify-center mb-14 mt-28">
@@ -29,7 +53,12 @@ export function Supplements() {
           className="border rounded-l-md border-darkest dark:border-white px-6 py-3 w-full bg-transparent text-darkest dark:text-white placeholder:text-mid focus:ring-0 focus:outline-none"
           placeholder="Supplement Ara"
         />
-        <button type="submit" className="border rounded-r-md border-darkest bg-white dark:border-white px-6 py-3 bg-transparent text-dark font-medium">Ara</button>
+        <button
+          type="submit"
+          className="border rounded-r-md border-darkest bg-white dark:border-white px-6 py-3 bg-transparent text-dark font-medium"
+        >
+          Ara
+        </button>
       </form>
       <Tab.Group>
         <Tab.List className="border-b border-light dark:border-dark flex gap-5 overflow-x-auto">
@@ -54,7 +83,9 @@ export function Supplements() {
           Kategoriler
         </Title>
         <ul className="mt-3">
-          <Badge>category</Badge>
+          {categories.map((item) => (
+            <Badge key={item}>{item}</Badge>
+          ))}
         </ul>
 
         <Tab.Panels className="mt-14">
@@ -66,8 +97,11 @@ export function Supplements() {
               >
                 <div>
                   <Title size="md">{value.name}</Title>
-                  <Text type="subtext">Vitamin/ Supplement</Text>
-                  <button onClick={() => setIsModalOpen(true)} className="mt-3 text-xs text-mid hover:underline underline-offset-2 decoration-brand">
+                  <button
+                    onClick={(e) => setIsModalOpen(e.target.id)}
+                    className="mt-3 text-sm text-mid hover:underline underline-offset-2 decoration-brand"
+                    id={value.name}
+                  >
                     Detay Göster
                   </button>
                 </div>
@@ -76,21 +110,20 @@ export function Supplements() {
                   <Title size="sm">{value.recommendation}</Title>
                   <Rating rate={value.rating} />
                 </div>
-
-                {isModalOpen && (
-                  <Modal
-                    supplement={value}
-                    onClick={() => setIsModalOpen((prev) => !prev)}
-                  />
-                )}
+                <Modal
+                  key={index}
+                  supplement={value}
+                  isOpen={isModalOpen}
+                  setIsOpen={setIsModalOpen}
+                />
               </PreviewCard>
             ))}
           </Tab.Panel>
           <Tab.Panel>
-            <Text>Content 2</Text>
+            <Text>Henüz Kullanıma Sunulmadı</Text>
           </Tab.Panel>
           <Tab.Panel>
-            <Text>Content 3</Text>
+            <Text>Henüz Kullanıma Sunulmadı</Text>
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
