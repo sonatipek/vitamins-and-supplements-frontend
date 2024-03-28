@@ -1,5 +1,4 @@
 import { XIcon, PillIcon, Clock10Icon } from "lucide-react";
-import Badge from "./Badge";
 import Title from "./Title";
 import Text from "./Text";
 import Rating from "./Rating";
@@ -32,7 +31,7 @@ export default function Modal({ supplement, setIsOpen, isOpen }) {
             <div className="px-6">
               <Rating className="mb-4" rate={supplement.rating} />
 
-              <Badge>{supplement.recommendation}</Badge>
+              <Title type="sm" className="!text-darkest font-normal">{supplement.recommendation}</Title>
 
               <ul className="w-full bg-light rounded-md mt-3 flex justify-center items-center list-['+'] gap-7 py-5">
                 {supplement.tags.map((value, index) => (
