@@ -107,7 +107,7 @@ export function Supplements() {
             <Badge
               key={item}
               onClick={(e) => setSelectedCategory(e.target.innerHTML)}
-              className={selectedCategory === item && "bg-red-200"}
+              className={selectedCategory === item && "bg-red-100 border-2"}
             >
               {item}
             </Badge>
