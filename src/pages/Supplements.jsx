@@ -176,7 +176,7 @@ export function Supplements() {
                 </PreviewCard>
               ))}
 
-            {vitamins.length === 0 && (
+            {vitamins.length === 0 && supplements.length === 0 && (
               <div className="col-span-3">
                 <Title size="sm" className="text-center mb-12">
                   {selectedCategory} kategorisi için bir takviye bulunmuyor.
@@ -222,7 +222,7 @@ export function Supplements() {
                 </PreviewCard>
               ))}
 
-            {vitamins.length === 0 && (
+            {supplements.length === 0 && (
               <div className="col-span-3">
                 <Title size="sm" className="text-center mb-12">
                   {selectedCategory} kategorisi için bir supplement bulunmuyor.
