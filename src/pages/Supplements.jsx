@@ -65,13 +65,70 @@ export function Supplements() {
       .then((json) => setSupplements(json));
   }, [selectedCategory]);
 
+  function searchTrigger(e) {
+    e.preventDefault();
+
+    fetch(
+      e.target.children[0].value !== ""
+        ? "https://vitamins-and-supplements.vercel.app/api/search/vitamin?name=" +
+            e.target.children[0].value
+        : "https://vitamins-and-supplements.vercel.app/api/vitamin",
+      {
+        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
+      }
+    )
+      .then((response) => response.json())
+      .then((json) =>
+        json.success == false ? setVitamins([]) : setVitamins(json)
+      );
+
+    fetch(
+      e.target.children[0].value !== ""
+        ? "https://vitamins-and-supplements.vercel.app/api/search/supplement?name=" +
+            e.target.children[0].value
+        : "https://vitamins-and-supplements.vercel.app/api/supplement",
+      {
+        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
+      }
+    )
+      .then((response) => response.json())
+      .then((json) =>
+        json.success == false ? setSupplements([]) : setSupplements(json)
+      );
+  }
+
+  function searchKeyUpTrigger(e) {
+    if (e.target.value === "") {
+      fetch("https://vitamins-and-supplements.vercel.app/api/supplement", {
+        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
+      })
+        .then((response) => response.json())
+        .then((json) =>
+          json.success == false ? setSupplements([]) : setSupplements(json)
+        );
+
+      fetch("https://vitamins-and-supplements.vercel.app/api/vitamin", {
+        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
+      })
+        .then((response) => response.json())
+        .then((json) =>
+          json.success == false ? setVitamins([]) : setVitamins(json)
+        );
+    }
+  }
+
   return (
     <section className="container">
-      <form action="#" className="flex items-center justify-center mb-14 mt-28">
+      <form
+        action="#"
+        className="flex items-center justify-center mb-14 mt-28"
+        onSubmit={(e) => searchTrigger(e)}
+      >
         <input
           type="text"
           className="border rounded-l-md border-darkest dark:border-white px-6 py-3 w-full bg-transparent text-darkest dark:text-white placeholder:text-mid focus:ring-0 focus:outline-none"
           placeholder="Supplement Ara"
+          onKeyUp={(e) => searchKeyUpTrigger(e)}
         />
         <button
           type="submit"
@@ -179,7 +236,7 @@ export function Supplements() {
             {vitamins.length === 0 && supplements.length === 0 && (
               <div className="col-span-3">
                 <Title size="sm" className="text-center mb-12">
-                  {selectedCategory} kategorisi için bir takviye bulunmuyor.
+                  Aradığınız kriter için bir takviye bulunmuyor.
                 </Title>
                 <img
                   src={NoData}
@@ -225,7 +282,7 @@ export function Supplements() {
             {supplements.length === 0 && (
               <div className="col-span-3">
                 <Title size="sm" className="text-center mb-12">
-                  {selectedCategory} kategorisi için bir supplement bulunmuyor.
+                  Aradığınız kriterler için bir supplement bulunmuyor.
                 </Title>
                 <img
                   src={NoData}
@@ -271,7 +328,7 @@ export function Supplements() {
             {vitamins.length === 0 && (
               <div className="col-span-3">
                 <Title size="sm" className="text-center mb-12">
-                  {selectedCategory} kategorisi için bir vitamin bulunmuyor.
+                  Aradığınız kriterler için bir vitamin bulunmuyor.
                 </Title>
                 <img
                   src={NoData}
