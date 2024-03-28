@@ -27,11 +27,29 @@ import {
   TwitterIcon,
 } from "lucide-react";
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 export default function ProjectAbout() {
   const { theme } = useContext(ThemeContext);
+  const [activeSection, setActiveSection] = useState('supplements-and-vitamins');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          setActiveSection(section.id);
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   return (
     <main className="container mt-28">
@@ -41,61 +59,61 @@ export default function ProjectAbout() {
           <li className="group">
             <a
               href="#supplements-and-vitamins"
-              className="text-light group-hover:text-mid flex translate-x-20  group-hover:translate-x-0 transition-transform duration-700 delay-75"
+              className={`${activeSection === "supplements-and-vitamins" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               Supplements & Vitamins
             </a>
-            <div className="h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500"></div>
+            <div className={`${activeSection === "supplements-and-vitamins" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
           </li>
 
           <li className="group">
             <a
               href="#tech-stack"
-              className="text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75"
+              className={`${activeSection === "tech-stack" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               Teknolojiler ve Araçlar
             </a>
-            <div className="h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500"></div>
+            <div className={`${activeSection === "tech-stack" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
           </li>
 
           <li className="group">
             <a
               href="#repos"
-              className="text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75"
+              className={`${activeSection === "repos" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               Proje Repoları
             </a>
-            <div className="h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500"></div>
+            <div className={`${activeSection === "repos" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
           </li>
 
           <li className="group">
             <a
               href="#contribution"
-              className="text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75"
+              className={`${activeSection === "contribution" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               Projelere Katkı
             </a>
-            <div className="h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500"></div>
+            <div className={`${activeSection === "contribution" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
           </li>
 
           <li className="group">
             <a
               href="#contact"
-              className="text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75"
+              className={`${activeSection === "contact" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               İletişim
             </a>
-            <div className="h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500"></div>
+            <div className={`${activeSection === "contact" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
           </li>
 
           <li className="group">
             <a
               href="#sources-and-references"
-              className="text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75"
+              className={`${activeSection === "sources-and-references" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               Kaynak & Referanslar
             </a>
-            <div className="h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500"></div>
+            <div className={`${activeSection === "sources-and-references" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
           </li>
         </ul>
       </div>
@@ -131,7 +149,7 @@ export default function ProjectAbout() {
         </Text>
 
         <div className="mt-6">
-          <h6 className="font-medium">Başlıca Özellikler:</h6>
+          <h6 className="font-medium dark:text-light">Başlıca Özellikler:</h6>
           <List
             listElements={[
               "Vitamin ve Supplementler arasında sekme geçişi",
