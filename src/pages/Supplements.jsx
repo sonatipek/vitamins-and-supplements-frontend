@@ -121,18 +121,18 @@ export function Supplements() {
     <section className="container">
       <form
         action="#"
-        className="flex items-center justify-center mb-14 mt-28"
+        className="flex items-center justify-center mb-14 mt-28 px-56"
         onSubmit={(e) => searchTrigger(e)}
       >
         <input
           type="text"
-          className="border rounded-l-md border-darkest dark:border-white px-6 py-3 w-full bg-transparent text-darkest dark:text-white placeholder:text-mid focus:ring-0 focus:outline-none"
+          className="border rounded-l-md border-darkest dark:border-white px-3 py-2 w-full bg-transparent text-darkest dark:text-white placeholder:text-mid focus:ring-0 focus:outline-none"
           placeholder="Supplement Ara"
           onKeyUp={(e) => searchKeyUpTrigger(e)}
         />
         <button
           type="submit"
-          className="border rounded-r-md border-darkest bg-white dark:border-white px-6 py-3 bg-transparent text-dark font-medium"
+          className="border rounded-r-md border-darkest bg-white dark:border-white px-3 py-2 bg-transparent text-dark font-medium"
         >
           Ara
         </button>
