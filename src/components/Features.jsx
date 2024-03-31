@@ -1,9 +1,10 @@
-import { Users, Info, ShieldCheck } from "lucide-react";
+import { Users, Info, ShieldCheck, ChevronRight } from "lucide-react";
 
 import Card from "./ui/Card";
 import Illustration from "../assets/feature_illustration.svg";
 import Title from "./ui/Title";
 import Text from "./ui/Text";
+import Link from "./ui/Link";
 
 const featuresList = [
   {
@@ -66,6 +67,16 @@ export default function Features() {
             </Card>
           ))}
         </div>
+        <Link
+          classname="mt-10 !text-brand !no-underline !font-semibold"
+          href="/supplements"
+        >
+          Hemen Keşfet
+          <ChevronRight
+            size={16}
+            className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+          />
+        </Link>
       </div>
     </section>
   );
