@@ -22,7 +22,7 @@ export default function Navbar() {
   const navLinks = [
     { title: "Ana Sayfa", href: "/" },
     { title: "Supplementler", href: "/supplements" },
-    { title: "Geliştiriciler İçin/Proje Hakkında", href: "/project-about" },
+    { title: "Proje Hakkında", href: "/project-about" },
   ];
 
   return (
