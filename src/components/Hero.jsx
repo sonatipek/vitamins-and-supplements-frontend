@@ -9,7 +9,7 @@ export default function Hero() {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <section className="mt-14 mb-20 md:mb-30 lg:mb-40 lg:container">
+    <section className="mt-20 mb-20 md:mb-30 lg:mb-40 lg:container">
       <div className="flex justify-center">
         <img
           src={theme === "light" ? Thunderbolt : ThunderboltLight}
@@ -18,40 +18,34 @@ export default function Hero() {
           className="mt-4 hidden md:inline"
         />
 
-        <div>
-          <h3 className="mx-auto text-3xl md:text-5xl md:leading-tight lg:text-6xl font-bold text-center text-pretty text-darkest dark:text-white ">
-            Yalnızca{" "}
-            <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-darkBrand to-brand">
-              ihtiyacınız olanı
-            </span>{" "}
+        <h3 className="mx-auto mt-12 text-3xl md:text-5xl md:leading-tight lg:text-6xl font-semibold text-center text-pretty text-darkest dark:text-white ">
+          Yalnızca ihtiyacınız olanı{" "}
+          <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-darkBrand to-brand">
             hemen keşfedin
-          </h3>
-          <p className="mx-auto text-mid dark:text-light font-light text-center mt-3 leading-none">
-            Beslenme programınızı en uygun şekilde destekleyin.
-          </p>
-        </div>
+          </span>
+        </h3>
 
         <img
           src={theme === "light" ? Thunderbolt : ThunderboltLight}
           alt="thunderbolt svg"
           width={224}
-          className="mt-4 hidden md:inline"
+          className="mt-4 hidden md:inline scale-x-[-1]"
         />
       </div>
 
-      <div className="flex flex-col md:flex-row items-center justify-center gap-5 mt-12 md:mt-12 lg:mt-0">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8 md:mt-0 lg:-mt-1 xl:-mt-12">
         <Link href="/supplements" type="button">
-          Supplement&apos;lere Göz At
+          Hemen Keşfet
         </Link>
 
         <Link
           href="https://linkedin.com/in/sonatipek"
           target="_blank"
-          classname="!text-darkest dark:!text-lightest font-semibold group"
+          classname="!text-brand !no-underline !font-semibold group"
         >
-          İletişime Geç
+          İş Birliği
           <ChevronRight
-            size={24}
+            size={16}
             className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
           />
         </Link>
