@@ -25,7 +25,7 @@ const featuresList = [
 
 export default function Features() {
   return (
-    <section className="relative pt-14 md:pt-28 pb-7 md:pb-14 overflow-hidden">
+    <section className="relative pt-14 md:pt-28 pb-7 md:pb-14 overflow-hidden mt-24">
       <img
         src={Illustration}
         className="hidden xl:inline absolute right-0 xl:-right-10 2xl:right-0 bottom-0"
