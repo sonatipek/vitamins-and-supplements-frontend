@@ -1,15 +1,15 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
-import { PillIcon, GlassWaterIcon, ListIcon } from "lucide-react";
+import { PillIcon, GlassWaterIcon, ListIcon, ChevronRight } from "lucide-react";
 import NoData from "../assets/no_data_illustration.svg";
 
 // Components
 import Title from "../components/ui/Title.jsx";
 import Badge from "../components/ui/Badge.jsx";
-import Rating from "../components/ui/Rating.jsx";
 import PreviewCard from "../components/ui/PreviewCard.jsx";
 import Modal from "../components/ui/Modal.jsx";
+import Text from "../components/ui/Text.jsx";
 
 const tabs = [
   { icon: <ListIcon strokeWidth={1.5} />, text: "Tümü" },
@@ -164,11 +164,18 @@ export function Supplements() {
             <Badge
               key={item}
               onClick={(e) => setSelectedCategory(e.target.innerHTML)}
-              className={selectedCategory === item && "!bg-brand !border-brand !text-white !font-medium"}
+              className={
+                selectedCategory === item &&
+                "!bg-brand !border-brand !text-white !font-medium"
+              }
             >
               {item}
             </Badge>
           ))}
+          <button className="ml-6 text-brand hover:text-brand/80"
+          onClick={() => setSelectedCategory()}>
+            Filtreyi Temizle
+          </button>
         </ul>
 
         <Tab.Panels className="mt-14">
@@ -177,23 +184,35 @@ export function Supplements() {
               vitamins.map((value, index) => (
                 <PreviewCard
                   key={index}
-                  className="flex items-center justify-between"
+                  className="flex flex-col items-start justify-between"
                 >
                   <div>
-                    <Title size="md">{value.name}</Title>
-                    <button
-                      onClick={(e) => setIsModalOpen(e.target.id)}
-                      className="mt-3 text-sm text-mid hover:underline underline-offset-2 decoration-brand"
-                      id={value.name}
+                    <Text type="subtext" className="font-bold !text-brand">
+                      {value.recommendation}
+                    </Text>
+                    <Title className="font-semibold text-2xl">
+                      {value.name}
+                    </Title>
+                    <Text
+                      type="subtext"
+                      className="mt-2 line-clamp-2 !text-base"
                     >
-                      Detay Göster
-                    </button>
+                      {value.suggestions[0]}
+                    </Text>
                   </div>
 
-                  <div className="flex flex-col items-end">
-                    <Title size="sm">{value.recommendation}</Title>
-                    <Rating rate={value.rating} />
-                  </div>
+                  <button
+                    onClick={(e) => setIsModalOpen(e.target.id)}
+                    className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                    id={value.name}
+                  >
+                    Detayları Gör
+                    <ChevronRight
+                      size={16}
+                      className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                    />
+                  </button>
+
                   <Modal
                     key={index}
                     supplement={value}
@@ -207,23 +226,35 @@ export function Supplements() {
               supplements.map((value, index) => (
                 <PreviewCard
                   key={index}
-                  className="flex items-center justify-between"
+                  className="flex flex-col items-start justify-between"
                 >
                   <div>
-                    <Title size="md">{value.name}</Title>
-                    <button
-                      onClick={(e) => setIsModalOpen(e.target.id)}
-                      className="mt-3 text-sm text-mid hover:underline underline-offset-2 decoration-brand"
-                      id={value.name}
+                    <Text type="subtext" className="font-bold !text-brand">
+                      {value.recommendation}
+                    </Text>
+                    <Title className="font-semibold text-2xl">
+                      {value.name}
+                    </Title>
+                    <Text
+                      type="subtext"
+                      className="mt-2 line-clamp-2 !text-base"
                     >
-                      Detay Göster
-                    </button>
+                      {value.suggestions[0]}
+                    </Text>
                   </div>
 
-                  <div className="flex flex-col items-end">
-                    <Title size="sm">{value.recommendation}</Title>
-                    <Rating rate={value.rating} />
-                  </div>
+                  <button
+                    onClick={(e) => setIsModalOpen(e.target.id)}
+                    className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                    id={value.name}
+                  >
+                    Detayları Gör
+                    <ChevronRight
+                      size={16}
+                      className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                    />
+                  </button>
+
                   <Modal
                     key={index}
                     supplement={value}
@@ -253,23 +284,35 @@ export function Supplements() {
               supplements.map((value, index) => (
                 <PreviewCard
                   key={index}
-                  className="flex items-center justify-between"
+                  className="flex flex-col items-start justify-between"
                 >
                   <div>
-                    <Title size="md">{value.name}</Title>
-                    <button
-                      onClick={(e) => setIsModalOpen(e.target.id)}
-                      className="mt-3 text-sm text-mid hover:underline underline-offset-2 decoration-brand"
-                      id={value.name}
+                    <Text type="subtext" className="font-bold !text-brand">
+                      {value.recommendation}
+                    </Text>
+                    <Title className="font-semibold text-2xl">
+                      {value.name}
+                    </Title>
+                    <Text
+                      type="subtext"
+                      className="mt-2 line-clamp-2 !text-base"
                     >
-                      Detay Göster
-                    </button>
+                      {value.suggestions[0]}
+                    </Text>
                   </div>
 
-                  <div className="flex flex-col items-end">
-                    <Title size="sm">{value.recommendation}</Title>
-                    <Rating rate={value.rating} />
-                  </div>
+                  <button
+                    onClick={(e) => setIsModalOpen(e.target.id)}
+                    className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                    id={value.name}
+                  >
+                    Detayları Gör
+                    <ChevronRight
+                      size={16}
+                      className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                    />
+                  </button>
+
                   <Modal
                     key={index}
                     supplement={value}
@@ -300,23 +343,35 @@ export function Supplements() {
               vitamins.map((value, index) => (
                 <PreviewCard
                   key={index}
-                  className="flex items-center justify-between"
+                  className="flex flex-col items-start justify-between"
                 >
                   <div>
-                    <Title size="md">{value.name}</Title>
-                    <button
-                      onClick={(e) => setIsModalOpen(e.target.id)}
-                      className="mt-3 text-sm text-mid hover:underline underline-offset-2 decoration-brand"
-                      id={value.name}
+                    <Text type="subtext" className="font-bold !text-brand">
+                      {value.recommendation}
+                    </Text>
+                    <Title className="font-semibold text-2xl">
+                      {value.name}
+                    </Title>
+                    <Text
+                      type="subtext"
+                      className="mt-2 line-clamp-2 !text-base"
                     >
-                      Detay Göster
-                    </button>
+                      {value.suggestions[0]}
+                    </Text>
                   </div>
 
-                  <div className="flex flex-col items-end">
-                    <Title size="sm">{value.recommendation}</Title>
-                    <Rating rate={value.rating} />
-                  </div>
+                  <button
+                    onClick={(e) => setIsModalOpen(e.target.id)}
+                    className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                    id={value.name}
+                  >
+                    Detayları Gör
+                    <ChevronRight
+                      size={16}
+                      className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                    />
+                  </button>
+
                   <Modal
                     key={index}
                     supplement={value}
