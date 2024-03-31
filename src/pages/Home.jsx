@@ -1,38 +1,118 @@
+import {
+  ChevronRight,
+  DumbbellIcon,
+  HeartPulseIcon,
+  PillIcon,
+  ShieldPlusIcon,
+} from "lucide-react";
 import Features from "../components/Features";
 import Hero from "../components/Hero";
-import Paragraph from "../components/Paragraph";
-import List from "../components/ui/List";
+import Link from "../components/ui/Link";
+import PreviewCard from "../components/ui/PreviewCard";
+import Text from "../components/ui/Text";
+import Title from "../components/ui/Title";
+import TitleWithDesc from "../components/ui/TitleWithDesc";
+import Card from "../components/ui/Card";
+
+const previewCardContents = [
+  {
+    tag: "Öneririz",
+    title: "D Vitamini",
+    suggestion:
+      "Eksikliği çok sık rastlandığı için özellikle kış aylarında her yetişkin bireyin vitamin D3 takviyesi almasını öneririz",
+  },
+  {
+    tag: "Öncelikli Değil",
+    title: "BCAA",
+    suggestion: "2:1:1 oranına sahip ürünler tercih edilebilir",
+  },
+  {
+    tag: "Özel Durumlarda Alınabilir",
+    title: "Glutamin",
+    suggestion:
+      "Yanık, yaralanma veya ameliyat sonrası durumlarda kullanılması faydalıdır",
+  },
+];
+
+const forWhomContents = [
+  {
+    icon: <DumbbellIcon />,
+    title: "Sporcular",
+    desc: "Performansını artırıp, yüksek ihtiyaçlarını karşılamak isteyen sporcular",
+    //
+  },
+  {
+    icon: <HeartPulseIcon />,
+    title: "Sağlık Bilinci Yüksek Bireyler",
+    desc: "İhtyiaçlarının farkında olup, en doğru takviyeyi araştıran bireyler",
+    //
+  },
+  {
+    icon: <PillIcon />,
+    title: "Bilgi Edinmek İsteyenler",
+    desc: "Vitamin ve Supplementler hakkında bilgi edinmek isteyen bireyler",
+  },
+  //
+  {
+    icon: <ShieldPlusIcon />,
+    title: "Alışkanlık Kazanmak İsteyenler",
+    desc: "Dengeli beslenme alışkanlıklarını geliştirmek isteyen bireyler",
+    //
+  },
+];
 
 function Home() {
   return (
     <>
       <Hero />
 
-      <Paragraph
-        title="Vitamins & Supplements"
-        description="Bazen “Bu takviyeye gerçekten ihtiyacım var mı?” sorusunun cevabını ararken uzun kaynaklar arasında kaybolabilir, pazarlamacıların kurbanı olabiliriz veya tam olarak ihtiyacımız olan takviyeyi bulmak zor olabilir. Aynı zamanda ürünlerin zamanlaması ve dozajı konusunda da kafa karışıklığı yaşayabiliriz. Bu noktada, hap bilgiler sunan bir video içeriği sonrasında ortaya çıkan bu fikir; kullanıcı dostu bir arayüz ile buluşarak, bu sorunlara çözüm sunmayı hedefler. Sedanter bireyler günlük hayatın yoğunluğu içinde dengeli beslenme alışkanlıklarını ihmal edebilirler,  sporcular ise yüksek besin ihtiyaçlarını karşılamak gibi sebeplerle ek takviyelere ihtiyaç duyarlar. Bu tür ihtiyaçlar sırasında gerekli araştırmanın zaman maliyetini düşürmek ve kullanıcıların sağlıklı yaşam alışkanlıklarını daha kolay oluşturmasını sağlamak amacıyla oluşturulmuştur."
-      />
-      <Paragraph
-        title="Neden Kullanmalısın ?"
-        description="Sağlıklı bir yaşam tarzı sürdürmek ve zindelikten maksimum düzeyde faydalanmak için doğru beslenmemiz gerekir. Bunun için de günlük aktivitenize veya spor alışkanlıklarınıza göre ek takviyelere ihtiyaç duyabiliriz. Ancak bu ek takviyelere ne kadar ihtiyacınız var? Bu ek takviyeler sizin durumunuz için gerçekten faydalı mı? İşte tam bu noktada, sizin için ihtiyacınız olabilecek supplementleri, birbirini tekrar eden kopya içerikli “pazarlama içerikleri”nden, kâr amacı ile takviyeyi öven içeriklerden uzak bir şekilde kendiniz keşfetmenize olanak tanımak istiyoruz. "
-      />
+      <div className="container text-center">
+        <TitleWithDesc
+          title="Vitamins & Supplements"
+          desc="Beslenme programınızı en uygun şekilde destekleyin."
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 text-start">
+          {previewCardContents.map((value, index) => (
+            <PreviewCard key={index}>
+              <Text type="subtext" className="font-bold !text-brand">
+                {value.tag}
+              </Text>
+              <Title className="font-semibold text-2xl">{value.title}</Title>
+
+              <Text type="subtext" className="mt-2 line-clamp-2 !text-base">
+                {value.suggestion}
+              </Text>
+            </PreviewCard>
+          ))}
+        </div>
+        <Link
+          classname="mt-10 !text-brand !no-underline !font-semibold"
+          href="/supplements"
+        >
+          Tamamını Gör
+          <ChevronRight
+            size={16}
+            className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+          />
+        </Link>
+      </div>
+
+      <div className="container text-center mt-32">
+        <TitleWithDesc
+          title="Kimlere Yönelik"
+          desc="Başlıca aşağıdaki grubu içerse de tek seferlik takviye kullanmak zorunda kalan, bir probleme çözüm arayan herkese yöneliktir."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+          {forWhomContents.map((value, index) => (
+            <Card title={value.title} icon={value.icon} key={index}>
+              {value.desc}
+            </Card>
+          ))}
+        </div>
+      </div>
 
       <Features />
-
-      <Paragraph
-        title="Kimlere Yönelik"
-        description="Başlıca aşağıdaki grubu içerse de tek seferlik takviye kullanmak zorunda kalan, bir probleme çözüm arayan herkese yöneliktir."
-      />
-      <div className="container">
-        <List
-          listElements={[
-            "Sporcular",
-            "Beslenme ve takviyeler hakkında bilgi edinmek isteyenler",
-            "Sağlık bilinci yüksek bireyler",
-            "Dengeli beslenme alışkanlıklarını geliştirmek isteyenler",
-          ]}
-        />
-      </div>
     </>
   );
 }
