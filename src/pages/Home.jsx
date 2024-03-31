@@ -44,7 +44,7 @@ const forWhomContents = [
   {
     icon: <HeartPulseIcon />,
     title: "Sağlık Bilinci Yüksek Bireyler",
-    desc: "İhtyiaçlarının farkında olup, en doğru takviyeyi araştıran bireyler",
+    desc: "İhtiyaçlarının farkında olup, en doğru takviyeyi araştıran bireyler",
     //
   },
   {
@@ -103,7 +103,7 @@ function Home() {
           title="Kimlere Yönelik"
           desc="Başlıca aşağıdaki grubu içerse de tek seferlik takviye kullanmak zorunda kalan, bir probleme çözüm arayan herkese yöneliktir."
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 md:gap-6 mt-6 px-6 sm:px-12 md:px-0">
           {forWhomContents.map((value, index) => (
             <Card title={value.title} icon={value.icon} key={index}>
               {value.desc}

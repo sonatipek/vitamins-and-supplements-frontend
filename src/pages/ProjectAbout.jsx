@@ -32,24 +32,28 @@ import { ThemeContext } from "../contexts/ThemeContext";
 
 export default function ProjectAbout() {
   const { theme } = useContext(ThemeContext);
-  const [activeSection, setActiveSection] = useState('supplements-and-vitamins');
+  const [activeSection, setActiveSection] = useState(
+    "supplements-and-vitamins"
+  );
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
+      const sections = document.querySelectorAll("section");
+      sections.forEach((section) => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+        if (
+          window.scrollY >= sectionTop &&
+          window.scrollY < sectionTop + sectionHeight
+        ) {
           setActiveSection(section.id);
         }
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
 
   return (
     <main className="container mt-28">
@@ -59,61 +63,97 @@ export default function ProjectAbout() {
           <li className="group">
             <a
               href="#supplements-and-vitamins"
-              className={`${activeSection === "supplements-and-vitamins" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              className={`${
+                activeSection === "supplements-and-vitamins" && "translate-x-14"
+              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               Supplements & Vitamins
             </a>
-            <div className={`${activeSection === "supplements-and-vitamins" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
+            <div
+              className={`${
+                activeSection === "supplements-and-vitamins" && "translate-x-14"
+              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+            ></div>
           </li>
 
           <li className="group">
             <a
               href="#tech-stack"
-              className={`${activeSection === "tech-stack" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              className={`${
+                activeSection === "tech-stack" && "translate-x-14"
+              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               Teknolojiler ve Araçlar
             </a>
-            <div className={`${activeSection === "tech-stack" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
+            <div
+              className={`${
+                activeSection === "tech-stack" && "translate-x-14"
+              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+            ></div>
           </li>
 
           <li className="group">
             <a
               href="#repos"
-              className={`${activeSection === "repos" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              className={`${
+                activeSection === "repos" && "translate-x-14"
+              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               Proje Repoları
             </a>
-            <div className={`${activeSection === "repos" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
+            <div
+              className={`${
+                activeSection === "repos" && "translate-x-14"
+              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+            ></div>
           </li>
 
           <li className="group">
             <a
               href="#contribution"
-              className={`${activeSection === "contribution" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              className={`${
+                activeSection === "contribution" && "translate-x-14"
+              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               Projelere Katkı
             </a>
-            <div className={`${activeSection === "contribution" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
+            <div
+              className={`${
+                activeSection === "contribution" && "translate-x-14"
+              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+            ></div>
           </li>
 
           <li className="group">
             <a
               href="#contact"
-              className={`${activeSection === "contact" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              className={`${
+                activeSection === "contact" && "translate-x-14"
+              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               İletişim
             </a>
-            <div className={`${activeSection === "contact" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
+            <div
+              className={`${
+                activeSection === "contact" && "translate-x-14"
+              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+            ></div>
           </li>
 
           <li className="group">
             <a
               href="#sources-and-references"
-              className={`${activeSection === "sources-and-references" && "translate-x-14"} text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              className={`${
+                activeSection === "sources-and-references" && "translate-x-14"
+              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
             >
               Kaynak & Referanslar
             </a>
-            <div className={`${activeSection === "sources-and-references" && "translate-x-14"} h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}></div>
+            <div
+              className={`${
+                activeSection === "sources-and-references" && "translate-x-14"
+              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+            ></div>
           </li>
         </ul>
       </div>
@@ -121,19 +161,26 @@ export default function ProjectAbout() {
 
       {/* Main Informations */}
       <section id="supplements-and-vitamins">
-        <Title size="lg">Supplements & Vitamins</Title>
+        <Title size="lg">Vitamins & Supplements</Title>
         <Text className="mt-4">
           Supplement & Vitamins, takviye gıda kullanımıyla ilgili Türkçe
           kaynakların kısıtlı olması nedeniyle bir ihtiyacı karşılamak üzere
           ortaya çıktı. Kaynak & Referanslar bölümünde belirtilen videodaki
           değerli bilgileri ve tasarım ile zenginleştirilmiş infografikleri,
           insanların kolayca erişebileceği bir web sitesine dönüştürme fikriyle
-          hareket edildi. Proje, takviye gıda kullanımına ihtiyaç duyan her
-          bireyin bilgiye kolayca ulaşabilmesini amaçlar. Özellikle de yeni
-          başlayan sporcuların, sıklıkla kendi ihtiyacı olmayan takviye
-          gıdalarını kullanmalarını veya pazarlama kampanyaları sonucu gereksiz
-          takviyeleri gerekliymiş gibi kullanmalarını gözlemledim. Projenin en
-          azından çevremizdeki insanları bilinçlendirmesini hedefliyorum.
+          hareket edildi.
+        </Text>
+        <Text className="mt-4">
+          Proje, takviye gıda kullanımına ihtiyaç duyan her bireyin bilgiye
+          kolayca ulaşabilmesini amaçlıyor. Özellikle de yeni başlayan
+          sporcuların, sıklıkla kendi ihtiyacı olmayan takviye gıdalarını
+          kullanmalarını veya pazarlama kampanyaları sonucu gereksiz takviyeleri
+          gerekliymiş gibi kullanmalarını gözlemledim. Ancak bu ek takviyeler
+          sizin durumunuz için gerçekten faydalı mı? İşte tam bu noktada, sizin
+          için ihtiyacınız olabilecek supplementleri, birbirini tekrar eden
+          kopya içerikli “pazarlama içerikleri”nden, kâr amacı ile takviyeyi
+          öven içeriklerden uzak bir şekilde kendiniz keşfetmenize olanak
+          tanıyoruz
         </Text>
         <Text className="mt-6">
           Bu projeyi geliştirmek; React ile useEffect, React optimizasyonları

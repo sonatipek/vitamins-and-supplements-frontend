@@ -121,7 +121,7 @@ export function Supplements() {
     <section className="container">
       <form
         action="#"
-        className="flex items-center justify-center mb-14 mt-28 px-56"
+        className="flex items-center justify-center mb-14 mt-28 px-6 lg:px-56"
         onSubmit={(e) => searchTrigger(e)}
       >
         <input

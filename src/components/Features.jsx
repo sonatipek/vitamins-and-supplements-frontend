@@ -34,13 +34,13 @@ export default function Features() {
       />
 
       <div className="container flex flex-col items-center text-center">
-        <Title className="!font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-darkBrand">
+        <Title className="!font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-darkBrand dark:text-transparent">
           Amacımız ne?
         </Title>
-        <Title size="lg" className="!font-bold !text-dark">
+        <Title size="lg" className="!font-bold">
           Gerçekten İhtiyaç Mı?
         </Title>
-        <Text className="text-mid text-xl mt-2 px-48">
+        <Text className="text-mid text-xl mt-2 px-1 md:px-6 lg:px-12 xl:px-36">
           Bazen “Bu takviyeye gerçekten ihtiyacım var mı?” sorusunun cevabını
           ararken uzun kaynaklar arasında kaybolabilir, pazarlamacıların kurbanı
           olabiliriz veya tam olarak ihtiyacımız olan takviyeyi bulmak zor
@@ -49,10 +49,10 @@ export default function Features() {
           daha kolay oluşturmasını sağlamak amacıyla oluşturulmuştur.
         </Text>
 
-        <Title className="!font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-darkBrand mt-14 mb-2">
+        <Title className="!font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-darkBrand mt-14 mb-2 dark:text-transparent">
           Takviyelere ne kadar ihtiyacınız var?
         </Title>
-        <Text className="text-mid px-48">
+        <Text className="text-mid px-1 md:px-6 lg:px-12 xl:px-36">
           Günlük aktivitemize veya spor alışkanlıklarımıza göre takviye gıdalara
           ihtiyaç duyabiliriz. Ancak takviyeler sizin durumunuz için gerçekten
           faydalı mı? İşte tam bu noktada, sizin için ihtiyacınız olabilecek
@@ -60,7 +60,7 @@ export default function Features() {
           içerikleri”nden, kâr amacı ile takviyeyi öven içeriklerden uzak bir
           şekilde kendiniz keşfetmenize olanak tanımak istiyoruz.
         </Text>
-        <div className="grid md:grid-cols-3 gap-2 md:gap-4 lg:gap-6 px-24">
+        <div className="grid md:grid-cols-3 gap-2 md:gap-4 lg:gap-6 px-6 sm:px-24 md:px-0 lg:px-12 xl:px-36">
           {featuresList.map((value, index) => (
             <Card title={value.title} icon={value.icon} key={index}>
               {value.desc}
