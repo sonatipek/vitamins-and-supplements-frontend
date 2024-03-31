@@ -19,7 +19,7 @@ export default function Link({
               color === "brand"
                 ? "text-white hover:text-darkest hover:dark:text-white"
                 : "text-darkest hover:text-white hover:dark:text-white"
-            } transition-colors duration-300 px-14 py-2.5 rounded-full flex items-center justify-center font-medium shadow-lg`
+            } transition-colors duration-300 px-14 py-3.5 rounded-full flex items-center justify-center font-medium shadow-lg`
           : "text-mid underline underline-offset-4 hover:text-dark dark:hover:text-light"
       } ${classname} ${!icon ? "mr-0" : "mr-1"}`}
     >
