@@ -18,7 +18,7 @@ export default function Hero() {
           className="mt-4 hidden md:inline"
         />
 
-        <h3 className="mx-auto mt-12 text-3xl md:text-5xl md:leading-tight lg:text-6xl font-semibold text-center text-pretty text-darkest dark:text-white ">
+        <h3 className="mx-auto mt-12 text-3xl md:text-5xl md:leading-tight lg:text-6xl lg:px-24 font-semibold text-center text-pretty text-darkest dark:text-white ">
           Yalnızca ihtiyacınız olanı{" "}
           <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-darkBrand to-brand">
             hemen keşfedin
