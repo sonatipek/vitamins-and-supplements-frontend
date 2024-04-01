@@ -19,6 +19,26 @@ const tabs = [
   { icon: <PillIcon strokeWidth={1.5} />, text: "Vitamins" },
 ];
 
+const framerContainer = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.2,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const framerItem = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
+
 export function Supplements() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -190,7 +210,11 @@ export function Supplements() {
           {/* General Tab */}
           <Tab.Panel>
             {vitamins.length === 0 && supplements.length === 0 && (
-              <div className="col-span-3">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="col-span-3"
+              >
                 <Title size="sm" className="text-center mb-12">
                   Aradığınız kriter için bir takviye bulunmuyor.
                 </Title>
@@ -199,7 +223,7 @@ export function Supplements() {
                   alt="no data illustration"
                   className="w-1/4 mx-auto"
                 />
-              </div>
+              </motion.div>
             )}
 
             {(vitamins.length !== 0 || supplements.length !== 0) && (
@@ -208,12 +232,18 @@ export function Supplements() {
                   title="Öneririz"
                   desc="Öncelikli olarak tavsiye edilen takviyeler"
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12">
+                <motion.div
+                  variants={framerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                >
                   {vitamins &&
                     vitamins.map((value, index) => {
                       if (value.recommendation === "Öneririz") {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -262,6 +292,7 @@ export function Supplements() {
                       if (value.recommendation === "Öneririz") {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -305,18 +336,24 @@ export function Supplements() {
                         );
                       }
                     })}
-                </div>
+                </motion.div>
 
                 <TitleWithDesc
                   title="Öncelikli Değil"
                   desc="Öncelikli olmayan takviyeler"
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12">
+                <motion.div
+                  variants={framerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                >
                   {supplements &&
                     supplements.map((value, index) => {
                       if (value.recommendation === "Öncelikli Değil") {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -365,6 +402,7 @@ export function Supplements() {
                       if (value.recommendation === "Öncelikli Değil") {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -408,13 +446,18 @@ export function Supplements() {
                         );
                       }
                     })}
-                </div>
+                </motion.div>
 
                 <TitleWithDesc
                   title="Özel Durumlarda Alınabilir"
                   desc="Öncelikli olarak tavsiye edilmeyen, özel durumlara bağlı alınması tavsiye edilen takviyeler"
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                <motion.div
+                  variants={framerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"
+                >
                   {supplements &&
                     supplements.map((value, index) => {
                       if (
@@ -422,6 +465,7 @@ export function Supplements() {
                       ) {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -467,9 +511,12 @@ export function Supplements() {
                     })}
                   {vitamins &&
                     vitamins.map((value, index) => {
-                      if (value.recommendation === "Özel Durumlarda Alınabilir") {
+                      if (
+                        value.recommendation === "Özel Durumlarda Alınabilir"
+                      ) {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -513,7 +560,7 @@ export function Supplements() {
                         );
                       }
                     })}
-                </div>
+                </motion.div>
               </div>
             )}
           </Tab.Panel>
@@ -522,7 +569,11 @@ export function Supplements() {
           {/* Supplements Tab */}
           <Tab.Panel>
             {supplements.length === 0 && (
-              <div className="col-span-3">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="col-span-3"
+              >
                 <Title size="sm" className="text-center mb-12">
                   Aradığınız kriterler için bir supplement bulunmuyor.
                 </Title>
@@ -531,7 +582,7 @@ export function Supplements() {
                   alt="no data illustration"
                   className="w-1/4 mx-auto"
                 />
-              </div>
+              </motion.div>
             )}
 
             {supplements.length !== 0 && (
@@ -540,12 +591,18 @@ export function Supplements() {
                   title="Öneririz"
                   desc="Öncelikli olarak tavsiye edilen supplementler"
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12">
+                <motion.div
+                  variants={framerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                >
                   {supplements &&
                     supplements.map((value, index) => {
                       if (value.recommendation === "Öneririz") {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -589,18 +646,24 @@ export function Supplements() {
                         );
                       }
                     })}
-                </div>
+                </motion.div>
 
                 <TitleWithDesc
                   title="Öncelikli Değil"
                   desc="Öncelikli olmayan supplementler"
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12">
+                <motion.div
+                  variants={framerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                >
                   {supplements &&
                     supplements.map((value, index) => {
                       if (value.recommendation === "Öncelikli Değil") {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -644,13 +707,18 @@ export function Supplements() {
                         );
                       }
                     })}
-                </div>
+                </motion.div>
 
                 <TitleWithDesc
                   title="Özel Durumlarda Alınabilir"
                   desc="Öncelikli olarak tavsiye edilmeyen, özel durumlara bağlı alınması tavsiye edilen supplementler"
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                <motion.div
+                  variants={framerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"
+                >
                   {supplements &&
                     supplements.map((value, index) => {
                       if (
@@ -658,6 +726,7 @@ export function Supplements() {
                       ) {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -701,7 +770,7 @@ export function Supplements() {
                         );
                       }
                     })}
-                </div>
+                </motion.div>
               </div>
             )}
           </Tab.Panel>
@@ -710,7 +779,11 @@ export function Supplements() {
           {/* Vitamins Tab */}
           <Tab.Panel>
             {vitamins.length === 0 && (
-              <div className="col-span-3">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="col-span-3"
+              >
                 <Title size="sm" className="text-center mb-12">
                   Aradığınız kriterler için bir vitamin bulunmuyor.
                 </Title>
@@ -719,7 +792,7 @@ export function Supplements() {
                   alt="no data illustration"
                   className="w-1/4 mx-auto"
                 />
-              </div>
+              </motion.div>
             )}
             {vitamins.length !== 0 && (
               <div>
@@ -727,12 +800,18 @@ export function Supplements() {
                   title="Öneririz"
                   desc="Öncelikli olarak tavsiye edilen vitaminler"
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12">
+                <motion.div
+                  variants={framerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                >
                   {vitamins &&
                     vitamins.map((value, index) => {
                       if (value.recommendation === "Öneririz") {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -776,18 +855,24 @@ export function Supplements() {
                         );
                       }
                     })}
-                </div>
+                </motion.div>
 
                 <TitleWithDesc
                   title="Öncelikli Değil"
                   desc="Öncelikli olmayan vitaminler"
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12">
+                <motion.div
+                  variants={framerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                >
                   {vitamins &&
                     vitamins.map((value, index) => {
                       if (value.recommendation === "Öncelikli Değil") {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -831,14 +916,19 @@ export function Supplements() {
                         );
                       }
                     })}
-                </div>
+                </motion.div>
 
                 <TitleWithDesc
                   title="Özel Durumlarda Alınabilir"
                   desc="Öncelikli olarak tavsiye edilmeyen, özel durumlara bağlı alınması tavsiye edilen vitaminler"
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12">
+                <motion.div
+                  variants={framerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                >
                   {vitamins &&
                     vitamins.map((value, index) => {
                       if (
@@ -846,6 +936,7 @@ export function Supplements() {
                       ) {
                         return (
                           <PreviewCard
+                            variants={framerItem}
                             key={index}
                             className="flex flex-col items-start justify-between"
                           >
@@ -889,7 +980,7 @@ export function Supplements() {
                         );
                       }
                     })}
-                </div>
+                </motion.div>
               </div>
             )}
           </Tab.Panel>
