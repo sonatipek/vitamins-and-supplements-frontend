@@ -29,6 +29,27 @@ import {
 
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { motion } from "framer-motion";
+
+const framerContainer = {
+  visible: {
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const framerItem = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+  },
+};
 
 export default function ProjectAbout() {
   const { theme } = useContext(ThemeContext);
@@ -56,7 +77,11 @@ export default function ProjectAbout() {
   }, []);
 
   return (
-    <main className="container mt-28">
+    <motion.main
+      className="container mt-28"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       {/* Left Navigation */}
       <div className="hidden lg:flex fixed right-4">
         <ul className="space-y-4">
@@ -212,15 +237,20 @@ export default function ProjectAbout() {
       {/* Main Informations End */}
 
       {/* Tech Stack  */}
-      <section className="mt-14" id="tech-stack">
+      <motion.section className="mt-14" id="tech-stack">
         <Title size="lg">Teknoloji ve Araçlar</Title>
         <Text className="mt-4" type="subtext">
           Proje genelinde kullandığım tüm teknoloji ve araçlar setini aşağıda
           bulabilirsiniz.
         </Text>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 mt-6">
-          <div>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 mt-6"
+          initial="hidden"
+          animate="visible"
+          variants={framerContainer}
+        >
+          <motion.div variants={framerItem}>
             <Title className="text-center">Front-end</Title>
             <PreviewCard className="grid grid-cols-5 items-center justify-center gap-6">
               <img
@@ -253,9 +283,9 @@ export default function ProjectAbout() {
                 className="cursor-pointer hover:scale-105 duration-700 h-14"
               />
             </PreviewCard>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={framerItem}>
             <Title className="text-center">Back-end</Title>
             <PreviewCard className="grid grid-cols-5 items-center justify-center gap-6">
               <img
@@ -276,9 +306,9 @@ export default function ProjectAbout() {
                 className="cursor-pointer hover:scale-105 duration-700 h-14"
               />
             </PreviewCard>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={framerItem}>
             <Title className="text-center">Hosting</Title>
             <PreviewCard className="grid grid-cols-5 items-center justify-center gap-6">
               <img
@@ -287,9 +317,9 @@ export default function ProjectAbout() {
                 className="cursor-pointer hover:scale-105 duration-700 h-14"
               />
             </PreviewCard>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={framerItem}>
             <Title className="text-center">Design</Title>
             <PreviewCard className="grid grid-cols-5 items-center justify-center gap-6">
               <img
@@ -298,9 +328,9 @@ export default function ProjectAbout() {
                 className="cursor-pointer hover:scale-105 duration-700"
               />
             </PreviewCard>
-          </div>
-        </div>
-      </section>
+          </motion.div>
+        </motion.div>
+      </motion.section>
       {/* Tech Stack  End*/}
 
       {/* Github Repos */}
@@ -432,6 +462,6 @@ export default function ProjectAbout() {
         </ul>
       </section>
       {/* Sources and References End */}
-    </main>
+    </motion.main>
   );
 }

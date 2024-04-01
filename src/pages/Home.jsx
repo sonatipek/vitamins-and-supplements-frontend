@@ -14,6 +14,8 @@ import Title from "../components/ui/Title";
 import TitleWithDesc from "../components/ui/TitleWithDesc";
 import Card from "../components/ui/Card";
 
+import { motion } from "framer-motion";
+
 const previewCardContents = [
   {
     tag: "Öneririz",
@@ -63,7 +65,7 @@ const forWhomContents = [
 
 function Home() {
   return (
-    <>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Hero />
 
       <div className="container text-center">
@@ -113,7 +115,7 @@ function Home() {
       </div>
 
       <Features />
-    </>
+    </motion.div>
   );
 }
 
