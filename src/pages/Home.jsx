@@ -63,6 +63,21 @@ const forWhomContents = [
   },
 ];
 
+const contributors = [
+  {
+    name: "Eren Kahveci",
+    img: "https://mir-s3-cdn-cf.behance.net/user/115/f1d5ea1120701863.65c4c5225975f.jpg",
+    url: "https://www.linkedin.com/in/erenkahveci/",
+    role: "UI/UX Designer",
+  },
+  {
+    name: "Sonat İpek",
+    img: "https://avatars.githubusercontent.com/u/80075444?v=4",
+    url: "https://www.linkedin.com/in/sonatipek/",
+    role: "Full Stack Developer",
+  },
+];
+
 function Home() {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -115,6 +130,35 @@ function Home() {
       </div>
 
       <Features />
+
+      <div className="container mt-36 text-center">
+        <TitleWithDesc
+          title="Katkıda Bulunanlar"
+          desc="Projenin herhangi bir noktasında katkıda bulunanlar"
+        />
+
+        <div className="flex items-center justify-center gap-3 mt-6">
+          {contributors.map((value, index) => (
+            <a
+              key={index}
+              href={value.url}
+              className="border p-2 rounded-lg group flex justify-start items-center gap-3"
+            >
+              <img
+                className="rounded-full size-11 grayscale group-hover:grayscale-0 transition-all duration-500"
+                src={value.img}
+                alt={value.name}
+              />
+              <div className="text-start">
+                <span className="text-lg text-mid font-medium group-hover:text-brand transition-colors duration-500">{value.name}</span>
+                <Text type="subtext" className="text-mid">
+                  {value.role}
+                </Text>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
     </motion.div>
   );
 }
