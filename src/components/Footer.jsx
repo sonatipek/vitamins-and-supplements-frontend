@@ -35,7 +35,7 @@ export default function Footer() {
   const { theme } = useContext(ThemeContext);
   return (
     <>
-      <footer className="container mt-24 md:mt-52 flex flex-col md:flex-row items-start justify-between border-y dark:border-mid py-6 px-4 md:px-0">
+      <footer className="container mt-24 md:mt-32 flex flex-col md:flex-row items-start justify-between border-y dark:border-mid py-6 px-4 md:px-0">
         <div className="w-3/3 md:w-1/3 mb-7 md:mb-0">
           <a href="/" className="">
             <img
