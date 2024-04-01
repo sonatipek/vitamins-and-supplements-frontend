@@ -11,7 +11,7 @@ import { ThemeContext } from "../contexts/ThemeContext";
 const navLinks = [
   { title: "Ana Sayfa", href: "/" },
   { title: "Supplementler", href: "/supplements" },
-  { title: "Geliştiriciler İçin/Proje Hakkında", href: "/project-about" },
+  { title: "Proje Hakkında", href: "/project-about" },
 ];
 
 const contactLinks = [
