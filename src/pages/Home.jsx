@@ -134,7 +134,7 @@ function Home() {
       <div className="container mt-36 text-center">
         <TitleWithDesc
           title="Katkıda Bulunanlar"
-          desc="Projenin herhangi bir noktasında katkıda bulunanlar"
+          desc="Projede, büyük-küçük demeden herhangi bir şekilde emeği olanlar"
         />
 
         <div className="flex items-center justify-center gap-3 mt-6">
