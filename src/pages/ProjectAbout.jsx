@@ -429,8 +429,15 @@ export default function ProjectAbout() {
               Kaynak Video Linki:
             </Link>{" "}
             Projede bana ilham kaynağı olan ve bilgileri, öneri ve
-            puanlandırmayı, modal tasarımını referans aldığım video içeriğine
-            aşağıdaki linkten veya yandaki kısımdan ulaşabilirsiniz.
+            puanlandırmayı kaynak olarak kullandığım video içeriğine başlıktaki
+            linkten veya{" "}
+            <Link
+              href="https://www.youtube.com/watch?v=z3LFfY3AhVQ"
+              target="_blank"
+            >
+              buradan
+            </Link>{" "}
+            ulaşabilirsiniz
           </li>
           <li className="dark:text-light">
             <Link href="https://undraw.co/illustrations" target="_blank">
