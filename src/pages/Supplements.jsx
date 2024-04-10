@@ -300,7 +300,7 @@ export function Supplements() {
                               />
                               <Text className="mt-2 font-semibold text-mid">
                                 Bu katergoride öncelikli olarak tavsiye edilen
-                                bir vitamin bulunmuyor.
+                                bir takviye bulunmuyor.
                               </Text>
                             </motion.div>
                           );
