@@ -3,6 +3,9 @@ import { Fragment, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Tab } from "@headlessui/react";
 import { PillIcon, GlassWaterIcon, ListIcon, ChevronRight } from "lucide-react";
+
+// Assets
+import EmptyFilter from "../assets/empty_illustration.svg";
 import NoData from "../assets/no_data_illustration.svg";
 
 // Components
@@ -209,23 +212,6 @@ export function Supplements() {
         <Tab.Panels className="mt-14">
           {/* General Tab */}
           <Tab.Panel>
-            {vitamins.length === 0 && supplements.length === 0 && (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="col-span-3"
-              >
-                <Title size="sm" className="text-center mb-12">
-                  Aradığınız kriter için bir takviye bulunmuyor.
-                </Title>
-                <img
-                  src={NoData}
-                  alt="no data illustration"
-                  className="w-1/4 mx-auto"
-                />
-              </motion.div>
-            )}
-
             {(vitamins.length !== 0 || supplements.length !== 0) && (
               <div>
                 <TitleWithDesc
@@ -285,6 +271,40 @@ export function Supplements() {
                             />
                           </PreviewCard>
                         );
+                      } else {
+                        let supplementSuggestions = supplements.filter(
+                          (supplement) =>
+                            supplement.recommendation === "Öneririz"
+                        );
+                        let vitaminSuggestions = vitamins.filter(
+                          (vitamin) => vitamin.recommendation === "Öneririz"
+                        );
+
+                        if (
+                          supplementSuggestions.length === 0 &&
+                          vitaminSuggestions.length === 0 &&
+                          index === 0
+                        ) {
+                          return (
+                            <motion.div
+                              key={index}
+                              className="col-span-1 mt-3"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                            >
+                              <img
+                                src={EmptyFilter}
+                                alt="Empty filter illustration"
+                                width={160}
+                                className="mx-auto"
+                              />
+                              <Text className="mt-2 font-semibold text-mid">
+                                Bu katergoride öncelikli olarak tavsiye edilen
+                                bir vitamin bulunmuyor.
+                              </Text>
+                            </motion.div>
+                          );
+                        }
                       }
                     })}
                   {supplements &&
@@ -395,6 +415,41 @@ export function Supplements() {
                             />
                           </PreviewCard>
                         );
+                      } else {
+                        let supplementSuggestions = supplements.filter(
+                          (supplement) =>
+                            supplement.recommendation === "Öncelikli Değil"
+                        );
+                        let vitaminSuggestions = vitamins.filter(
+                          (vitamin) =>
+                            vitamin.recommendation === "Öncelikli Değil"
+                        );
+
+                        if (
+                          supplementSuggestions.length === 0 &&
+                          vitaminSuggestions.length === 0 &&
+                          index === 0
+                        ) {
+                          return (
+                            <motion.div
+                              key={index}
+                              className="col-span-1 mt-3"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                            >
+                              <img
+                                src={EmptyFilter}
+                                alt="Empty filter illustration"
+                                width={160}
+                                className="mx-auto"
+                              />
+                              <Text className="mt-2 font-semibold text-mid">
+                                Bu katergoride önceliksiz olarak tavsiye edilen
+                                bir takviye bulunmuyor.
+                              </Text>
+                            </motion.div>
+                          );
+                        }
                       }
                     })}
                   {vitamins &&
@@ -507,6 +562,43 @@ export function Supplements() {
                             />
                           </PreviewCard>
                         );
+                      } else {
+                        let supplementSuggestions = supplements.filter(
+                          (supplement) =>
+                            supplement.recommendation ===
+                            "Özel Durumlarda Alınabilir"
+                        );
+                        let vitaminSuggestions = vitamins.filter(
+                          (vitamin) =>
+                            vitamin.recommendation ===
+                            "Özel Durumlarda Alınabilir"
+                        );
+
+                        if (
+                          supplementSuggestions.length === 0 &&
+                          vitaminSuggestions.length === 0 &&
+                          index === 0
+                        ) {
+                          return (
+                            <motion.div
+                              key={index}
+                              className="col-span-1 mt-3"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                            >
+                              <img
+                                src={EmptyFilter}
+                                alt="Empty filter illustration"
+                                width={160}
+                                className="mx-auto"
+                              />
+                              <Text className="mt-2 font-semibold text-mid">
+                                Bu katergoride yalnızca öncelikli durumlarda
+                                tavsiye edilen bir takviye bulunmuyor
+                              </Text>
+                            </motion.div>
+                          );
+                        }
                       }
                     })}
                   {vitamins &&
@@ -644,6 +736,33 @@ export function Supplements() {
                             />
                           </PreviewCard>
                         );
+                      } else {
+                        let suggestions = supplements.filter(
+                          (supplement) =>
+                            supplement.recommendation === "Öneririz"
+                        );
+
+                        if (suggestions.length === 0 && index === 0) {
+                          return (
+                            <motion.div
+                              key={index}
+                              className="col-span-1 mt-3"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                            >
+                              <img
+                                src={EmptyFilter}
+                                alt="Empty filter illustration"
+                                width={160}
+                                className="mx-auto"
+                              />
+                              <Text className="mt-2 font-semibold text-mid">
+                                Bu katergoride öncelikli olarak tavsiye edilen
+                                bir supplement bulunmuyor.
+                              </Text>
+                            </motion.div>
+                          );
+                        }
                       }
                     })}
                 </motion.div>
@@ -705,6 +824,33 @@ export function Supplements() {
                             />
                           </PreviewCard>
                         );
+                      } else {
+                        let suggestions = supplements.filter(
+                          (supplement) =>
+                            supplement.recommendation === "Öncelikli Değil"
+                        );
+
+                        if (suggestions.length === 0 && index === 0) {
+                          return (
+                            <motion.div
+                              key={index}
+                              className="col-span-1 mt-3"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                            >
+                              <img
+                                src={EmptyFilter}
+                                alt="Empty filter illustration"
+                                width={160}
+                                className="mx-auto"
+                              />
+                              <Text className="mt-2 font-semibold text-mid">
+                                Bu katergoride önceliksiz olarak tavsiye edilen
+                                bir supplement bulunmuyor.
+                              </Text>
+                            </motion.div>
+                          );
+                        }
                       }
                     })}
                 </motion.div>
@@ -768,6 +914,34 @@ export function Supplements() {
                             />
                           </PreviewCard>
                         );
+                      } else {
+                        let suggestions = supplements.filter(
+                          (supplement) =>
+                            supplement.recommendation ===
+                            "Özel Durumlarda Alınabilir"
+                        );
+
+                        if (suggestions.length === 0 && index === 0) {
+                          return (
+                            <motion.div
+                              key={index}
+                              className="col-span-1 mt-3"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                            >
+                              <img
+                                src={EmptyFilter}
+                                alt="Empty filter illustration"
+                                width={160}
+                                className="mx-auto"
+                              />
+                              <Text className="mt-2 font-semibold text-mid">
+                                Bu katergoride yalnızca öncelikli durumlarda
+                                tavsiye edilen bir supplement bulunmuyor
+                              </Text>
+                            </motion.div>
+                          );
+                        }
                       }
                     })}
                 </motion.div>
@@ -853,6 +1027,32 @@ export function Supplements() {
                             />
                           </PreviewCard>
                         );
+                      } else {
+                        let suggestions = vitamins.filter(
+                          (vitamin) => vitamin.recommendation === "Öneririz"
+                        );
+
+                        if (suggestions.length === 0 && index === 0) {
+                          return (
+                            <motion.div
+                              key={index}
+                              className="col-span-1 mt-3"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                            >
+                              <img
+                                src={EmptyFilter}
+                                alt="Empty filter illustration"
+                                width={160}
+                                className="mx-auto"
+                              />
+                              <Text className="mt-2 font-semibold text-mid">
+                                Bu katergoride öncelikli olarak tavsiye edilen
+                                bir vitamin bulunmuyor.
+                              </Text>
+                            </motion.div>
+                          );
+                        }
                       }
                     })}
                 </motion.div>
@@ -914,6 +1114,33 @@ export function Supplements() {
                             />
                           </PreviewCard>
                         );
+                      } else {
+                        let suggestions = vitamins.filter(
+                          (vitamin) =>
+                            vitamin.recommendation === "Öncelikli Değil"
+                        );
+
+                        if (suggestions.length === 0 && index === 0) {
+                          return (
+                            <motion.div
+                              key={index}
+                              className="col-span-1 mt-3"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                            >
+                              <img
+                                src={EmptyFilter}
+                                alt="Empty filter illustration"
+                                width={160}
+                                className="mx-auto"
+                              />
+                              <Text className="mt-2 font-semibold text-mid">
+                                Bu katergoride önceliksiz olarak tavsiye edilen
+                                bir vitamin bulunmuyor.
+                              </Text>
+                            </motion.div>
+                          );
+                        }
                       }
                     })}
                 </motion.div>
@@ -978,6 +1205,34 @@ export function Supplements() {
                             />
                           </PreviewCard>
                         );
+                      } else {
+                        let suggestions = vitamins.filter(
+                          (vitamin) =>
+                            vitamin.recommendation ===
+                            "Özel Durumlarda Alınabilir"
+                        );
+
+                        if (suggestions.length === 0 && index === 0) {
+                          return (
+                            <motion.div
+                              key={index}
+                              className="col-span-1 mt-3"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                            >
+                              <img
+                                src={EmptyFilter}
+                                alt="Empty filter illustration"
+                                width={160}
+                                className="mx-auto"
+                              />
+                              <Text className="mt-2 font-semibold text-mid">
+                                Bu katergoride yalnızca öncelikli durumlarda
+                                tavsiye edilen bir vitamin bulunmuyor
+                              </Text>
+                            </motion.div>
+                          );
+                        }
                       }
                     })}
                 </motion.div>
