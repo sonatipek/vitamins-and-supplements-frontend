@@ -201,23 +201,25 @@ export default function ProjectAbout() {
           sporcuların, sıklıkla kendi ihtiyacı olmayan takviye gıdalarını
           kullanmalarını veya pazarlama kampanyaları sonucu gereksiz takviyeleri
           gerekliymiş gibi kullanmalarını gözlemledim. Ancak bu ek takviyeler
-          sizin durumunuz için gerçekten faydalı mı? İşte tam bu noktada, sizin
-          için ihtiyacınız olabilecek supplementleri, birbirini tekrar eden
-          kopya içerikli “pazarlama içerikleri”nden, kâr amacı ile takviyeyi
-          öven içeriklerden uzak bir şekilde kendiniz keşfetmenize olanak
-          tanıyoruz
+          bazı durumlara özel olabilir ve sizin durumunuz için gerçekten fayda
+          sağlamayabilir. İşte bu noktada, sizin için ihtiyacınız olabilecek
+          supplementleri, birbirini tekrar eden kopya içerikli “pazarlama
+          içerikleri”nden ve kâr amacı ile takviyeyi öven içeriklerden uzak bir
+          şekilde bir araya getirdik. Ardınan ihtiyacınıza uygun takviye gıdayı
+          kendiniz keşfetmenize olanak tanımak için bu projeyi hayata geçirdik.
         </Text>
         <Text className="mt-6">
-          Bu projeyi geliştirmek; React ile useEffect, React optimizasyonları
-          (React.memo, useMemo, useCallback), Context API ile state yönetimi ve
-          RESTful API’lerle çalışma konularında deneyim kazanmama yardımcı oldu.
-          Ayrıca bu deneyim, react-router ile Multi-Page Application ve Framer
-          Motion ile animasyon ve Tailwindcss gibi konuları da içermektedir.
-          Back-end kısmında RESTful API yazma becerileri edindim. Bunun yanında
-          front-end tarafında veriyi alırken nasıl işlemlerden geçtiğini anlama
-          gibi faydası da oldu. Dolayısıyla, proje geliştirme sürecinde hem
-          front-end hem de back-end işlerine dair kapsamlı bir bakış açısı
-          edindiğimi söyleyebilirim.
+          Bu projeyi geliştirmek, useEffect, React optimizasyonları (React.memo,
+          useMemo, useCallback), Context API ile durum yönetimi ve RESTful
+          API'lerle çalışma gibi React ile ilgili deneyim kazanmama yardımcı
+          oldu. Bu deneyim aynı zamanda react-router ile çok sayfalı uygulama ve
+          Framer Motion ve Tailwindcss ile animasyonu da içeriyor.
+          <br />
+          Bunun yanında Back-end tarafında RESTful API yazma konusunda
+          beceri kazandım ve front-end tarafında verinin nasıl işlendiğini
+          anlamak açısından da faydalı oldu. Dolayısıyla proje geliştirme
+          sürecinde hem front-end hem de back-end çalışmalarında kapsamlı bir
+          bakış açısı kazandığımı söyleyebilirim.
         </Text>
 
         <div className="mt-6">
