@@ -6,6 +6,8 @@
 
 </div>
 
+![vitamins-supplements-homepage](https://github.com/sonatipek/vitamins-and-supplements-frontend/assets/80075444/c1fea27d-1065-4c10-b968-49b01f77d7e2)
+
 # Vitamins and Supplements
 
 Supplement & Vitamins was created to fulfill a need due to the limited resources available in Turkish on the use of supplements and was therefore created in Turkish. The idea was to turn the valuable information in the video mentioned in the Resources & References section and the design-enriched infographics into a website that people can easily access.
