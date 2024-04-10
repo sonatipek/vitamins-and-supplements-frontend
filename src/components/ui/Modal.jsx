@@ -1,9 +1,9 @@
 import { XIcon, PillIcon, Clock10Icon } from "lucide-react";
 import Title from "./Title";
 import Text from "./Text";
-import Rating from "./Rating";
 
 import { Dialog } from "@headlessui/react";
+import Badge from "./Badge";
 
 export default function Modal({ supplement, setIsOpen, isOpen }) {
   return (
@@ -19,64 +19,61 @@ export default function Modal({ supplement, setIsOpen, isOpen }) {
       <div className="fixed inset-0 w-screen overflow-y-auto">
         {/* Container to center the panel */}
         <div className="flex min-h-full items-center justify-center p-3">
-          <Dialog.Panel className="w-full max-w-md bg-white dark:bg-dark py-6 shadow-lg rounded-xl ">
+          <Dialog.Panel className="w-full max-w-2xl bg-white dark:bg-dark py-6 shadow-2xl rounded-xl">
             {/* head */}
-            <div className="flex justify-between items-center mb-4 px-6">
+            <div className="flex justify-between items-center px-6">
               <Title size="lg">{supplement.name}</Title>
               <button onClick={() => setIsOpen(false)}>
                 <XIcon size={32} className="dark:text-light" />
               </button>
             </div>
             {/* head end */}
-            <div className="px-6">
-              <Rating className="mb-4" rate={supplement.rating} />
 
-              <Title type="sm" className="!text-darkest font-normal">{supplement.recommendation}</Title>
-
-              <ul className="w-full bg-light rounded-md mt-3 flex justify-center items-center list-['+'] gap-7 py-5">
+            <div className="px-6 mt-2">
+              <Title type="sm" className="!text-brand font-semibold">{supplement.recommendation}</Title>
+              
+              <div className="w-full flex justify-start items-center gap-2 mt-3">
                 {supplement.tags.map((value, index) => (
-                  <li key={index} className="font-medium">
-                    {value}
-                  </li>
+                  <Badge key={index}>{value}</Badge>
                 ))}
-              </ul>
+              </div>
             </div>
 
-            <div className="w-full flex mt-3">
-              <div className="w-full bg-brand p-2 text-white">
+            <div className="w-full flex mt-6">
+              <div className="w-full bg-brand px-3 py-3 md:px-6 text-white shadow">
                 <h5 className="text-white font-bold">Faydaları</h5>
 
-                <ul className="list-disc ml-3 md:ml-6 mt-2">
+                <ul className="list-disc ml-4 md:ml-5 mt-2">
                   {supplement.benefits.map((value, index) => (
-                    <li key={index}>{value}</li>
+                    <li key={index} className="text-pretty">{value}</li>
                   ))}
                 </ul>
               </div>
 
-              <div className="w-full bg-light p-2">
+              <div className="w-full px-3 py-3 md:px-6 shadow">
                 <h5 className="font-bold">Kim Kullanmalı?</h5>
 
-                <ul className="list-disc ml-3 md:ml-5 mt-2">
+                <ul className="list-disc ml-4 md:ml-5 mt-2">
                   {supplement.whoShouldUse.map((value, index) => (
-                    <li key={index}>{value}</li>
+                    <li key={index} className="text-pretty">{value}</li>
                   ))}
                 </ul>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 mt-2 gap-3 md:gap-12 px-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-3 md:gap-12 px-6">
               <div className="py-2 px-4 shadow flex items-center gap-2 w-full dark:shadow-sm dark:shadow-darkest">
-                <PillIcon className="text-brand" />
-                <div>
-                  <Title>Doz</Title>
-                  <Text type="subtext">{supplement.dose}</Text>
+                <PillIcon className="text-brand"/>
+                <div className="ml-3">
+                  <Title className="font-normal">Doz</Title>
+                  <Text className="text-mid">{supplement.dose}</Text>
                 </div>
               </div>
               <div className="py-2 px-4 shadow flex items-center gap-2 dark:shadow-sm dark:shadow-darkest">
                 <Clock10Icon className="text-brand" />
-                <div>
-                  <Title>Zamanlama</Title>
-                  <Text type="subtext">{supplement.timing}</Text>
+                <div className="ml-3">
+                  <Title className="font-normal">Zamanlama</Title>
+                  <Text className="text-mid">{supplement.timing}</Text>
                 </div>
               </div>
             </div>
