@@ -6,7 +6,7 @@
 
 </div>
 
-![vitamins-supplements-homepage](https://github.com/sonatipek/vitamins-and-supplements-frontend/assets/80075444/c1fea27d-1065-4c10-b968-49b01f77d7e2)
+![Vitamins & Supplements Homepage](https://github.com/sonatipek/vitamins-and-supplements-frontend/assets/80075444/721fb179-d234-48c9-8f26-f69d01ddb1d8)
 
 # Vitamins and Supplements
 
@@ -19,7 +19,7 @@ For this interface I used the API that I wrote myself. To learn more about this 
 
 _Does not contain recommendations for use, I recommend that you consult your doctor in any case_
 
-## What I learned
+## What I Learned
 Developing this project helped me gain experience with React, such as useEffect, React optimizations (React.memo, useMemo, useCallback), state management with Context API and working with RESTful APIs. This experience also includes Multi-Page Application with react-router and animation with Framer Motion and Tailwindcss. 
 
 On the back-end side, I gained skills in writing RESTful APIs, and it was also useful to understand how data is processed on the front-end side. Therefore, I can say that I have gained a comprehensive perspective on both front-end and back-end work during the project development process.
@@ -31,6 +31,8 @@ On the back-end side, I gained skills in writing RESTful APIs, and it was also u
 - Dynamic content with information from the service with RESTful API
 - Simple interface supported by animations
 - Basic CRUD (Create, Read, Update, Delete) operations for backend service.
+
+![Vitamins & Supplements Listing Page](https://github.com/sonatipek/vitamins-and-supplements-frontend/assets/80075444/60c7a143-446f-4532-a16d-f5e2207f3009)
 
 ## Related Project
 
