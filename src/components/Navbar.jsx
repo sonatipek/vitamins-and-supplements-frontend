@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Github, MenuIcon, Moon, Sun, X } from "lucide-react";
+import { Github, MenuIcon, Moon, Sun, X, ArrowUpRight } from "lucide-react";
 
 import BrandLogo from "../assets/brand_logo.svg";
 
@@ -27,7 +27,7 @@ export default function Navbar() {
 
   return (
     <header className="">
-      <nav className="container py-3 flex flex-col md:flex-row items-center justify-between">
+      <nav className="container flex flex-col items-center justify-between py-3 md:flex-row">
         <a href="/" className="self-start">
           <img
             src={BrandLogo}
@@ -37,7 +37,7 @@ export default function Navbar() {
           <h1 className="hidden">Vitamins & Supplements</h1>
         </a>
         <button
-          className="inline md:hidden text-darkest dark:text-white absolute right-10 top-10 "
+          className="absolute right-10 top-10 inline text-darkest dark:text-white md:hidden "
           onClick={menuButtonHandler}
         >
           {isMenuOpen ? <X /> : <MenuIcon />}
@@ -46,12 +46,12 @@ export default function Navbar() {
         <ul
           className={`${
             isMenuOpen ? "static" : "absolute -translate-y-96"
-          } md:static md:-translate-y-0 flex flex-col md:flex-row gap-5 items-center transition-transform duration-500`}
+          } flex flex-col items-center gap-5 transition-transform duration-500 md:static md:-translate-y-0 md:flex-row`}
         >
           {navLinks.map((value, index) => (
             <li
               key={index}
-              className="text-darkest underline-offset-4 decoration-brand decoration-2 hover:underline font-medium dark:text-white"
+              className="font-medium text-darkest decoration-brand decoration-2 underline-offset-4 hover:underline dark:text-white"
             >
               <NavLink to={value.href}>{value.title}</NavLink>
             </li>
@@ -61,18 +61,30 @@ export default function Navbar() {
         <div
           className={`${
             isMenuOpen ? "static" : "absolute -translate-y-96"
-          } md:static md:-translate-y-0 flex gap-2 mt-12 md:mt-0 transition-transform duration-500`}
+          } mt-12 flex gap-2 transition-transform duration-500 md:static md:mt-0 md:-translate-y-0`}
         >
           <a
             target="_blank"
             href="https://github.com/sonatipek/vitamins-and-supplements-frontend"
-            className="flex pr-5 gap-2 text-dark dark:text-light border-r-2 border-light dark:border-mid hover:underline"
+            className="group relative flex gap-2 border-r-2 border-light pr-5 text-dark hover:underline dark:border-mid dark:text-light"
           >
             <Github strokeWidth={1.5} /> Repo
+            <ArrowUpRight
+              className="absolute right-0 text-mid opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              size={18}
+              strokeWidth={1.5}
+            />
           </a>
 
-          <button className="pl-2 text-dark dark:text-light hover:scale-105 transition-transform duration-300" onClick={themeButtonHandler}>
-            {theme === "light" ? <Moon strokeWidth={1.5} /> : <Sun strokeWidth={1.5} />}
+          <button
+            className="pl-2 text-dark transition-transform duration-300 hover:scale-105 dark:text-light"
+            onClick={themeButtonHandler}
+          >
+            {theme === "light" ? (
+              <Moon strokeWidth={1.5} />
+            ) : (
+              <Sun strokeWidth={1.5} />
+            )}
           </button>
         </div>
       </nav>
