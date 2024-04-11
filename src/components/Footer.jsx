@@ -1,42 +1,32 @@
-import { Github, Linkedin, Twitter, Globe } from "lucide-react";
+import { useContext } from "react";
 
+// UI Components
 import Text from "../components/ui/Text";
+import Link from "./ui/Link";
+
+// Assets
 import BrandLogo from "../assets/brand_logo.svg";
 import SonatLogo from "../assets/sonatipek_logo.svg";
 import SonatLogoLight from "../assets/sonatipek_logo_light.svg";
-import Link from "./ui/Link";
-import { useContext } from "react";
+
+// Contexts
 import { ThemeContext } from "../contexts/ThemeContext";
-
-const navLinks = [
-  { title: "Ana Sayfa", href: "/" },
-  { title: "Supplementler", href: "/supplements" },
-  { title: "Proje Hakkında", href: "/project-about" },
-];
-
-const contactLinks = [
-  { title: <Linkedin />, href: "https://linkedin.com/in/sonatipek" },
-  { title: <Twitter />, href: "https://twitter.com/sonatipek" },
-  { title: <Github />, href: "https://github.com/sonatipek" },
-  { title: <Globe />, href: "https://sonatipek.com" },
-];
-const projectLinks = [
-  {
-    title: "Front-end Repo",
-    href: "https://github.com/sonatipek/vitamins-and-supplements-frontend",
-  },
-  {
-    title: "Back-end Repo",
-    href: "https://github.com/sonatipek/vitamins-and-supplements-api",
-  },
-];
+import { ExternalLinksContext } from "../contexts/ExternalLinksContext";
 
 export default function Footer() {
+  // useContexts
   const { theme } = useContext(ThemeContext);
+  const { externalLinks } = useContext(ExternalLinksContext);
+
+
+  // Datas
+  const { navLinks } = externalLinks;
+  const { contactLinks } = externalLinks;
+  const { relatedProjects } = externalLinks;
   return (
     <>
-      <footer className="container mt-24 md:mt-32 flex flex-col md:flex-row items-start justify-between border-y dark:border-mid py-6 px-4 md:px-0">
-        <div className="w-3/3 md:w-1/3 mb-7 md:mb-0">
+      <footer className="container mt-24 flex flex-col items-start justify-between border-y px-4 py-6 dark:border-mid md:mt-32 md:flex-row md:px-0">
+        <div className="w-3/3 mb-7 md:mb-0 md:w-1/3">
           <a href="/" className="">
             <img
               src={BrandLogo}
@@ -51,13 +41,13 @@ export default function Footer() {
           </Text>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-10 md:gap-12 lg:gap-14">
+        <div className="flex flex-col gap-10 md:flex-row md:gap-12 lg:gap-14">
           <ul className="*:text-light">
-            <h6 className="font-bold !text-mid mb-2">Sayfalar</h6>
+            <h6 className="mb-2 font-bold !text-mid">Sayfalar</h6>
             {navLinks.map((value, index) => (
               <li
                 key={index}
-                className="hover:text-dark transition-colors duration-300 mt-1"
+                className="mt-1 transition-colors duration-300 hover:text-dark"
               >
                 <a href={value.href}>{value.title}</a>
               </li>
@@ -65,25 +55,25 @@ export default function Footer() {
           </ul>
 
           <ul className="*:text-light">
-            <h6 className="font-bold !text-mid mb-2">İletişim</h6>
+            <h6 className="mb-2 font-bold !text-mid">İletişim</h6>
             {contactLinks.map((value, index) => (
               <li
                 key={index}
-                className="hover:text-dark transition-colors duration-300 mt-1"
+                className="mt-1 transition-colors duration-300 hover:text-dark"
               >
                 <a href={value.href} target="_blank">
-                  {value.title}
+                  {value.icon}
                 </a>
               </li>
             ))}
           </ul>
 
           <ul className="*:text-light">
-            <h6 className="font-bold !text-mid mb-2">Proje</h6>
-            {projectLinks.map((value, index) => (
+            <h6 className="mb-2 font-bold !text-mid">Bağlantılı Projeler</h6>
+            {relatedProjects.map((value, index) => (
               <li
                 key={index}
-                className="hover:text-dark transition-colors duration-300 mt-1"
+                className="mt-1 transition-colors duration-300 hover:text-dark"
               >
                 <a href={value.href} target="_blank">
                   {value.title}
@@ -93,8 +83,8 @@ export default function Footer() {
           </ul>
         </div>
       </footer>
-      <div className="container mt-6 pb-5 flex flex-col md:flex-row items-center justify-between">
-        <Text className="text-mid flex items-center gap-2">
+      <div className="container mt-6 flex flex-col items-center justify-between pb-5 md:flex-row">
+        <Text className="flex items-center gap-2 text-mid">
           Built by{" "}
           <a href="https://sonatipek.com" target="_blank">
             <img

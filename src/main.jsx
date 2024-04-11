@@ -11,6 +11,7 @@ import { Supplements, SupplementsLoader } from "./pages/Supplements.jsx";
 import ProjectAbout from "./pages/ProjectAbout.jsx";
 
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
+import { ExternalLinksProvider } from "./contexts/ExternalLinksContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider>
-    <RouterProvider router={router} />
-  </ThemeProvider>
+    <ExternalLinksProvider>
+      <RouterProvider router={router} />
+    </ExternalLinksProvider>
+  </ThemeProvider>,
 );

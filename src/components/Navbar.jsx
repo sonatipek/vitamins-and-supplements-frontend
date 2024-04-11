@@ -2,14 +2,22 @@ import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Github, MenuIcon, Moon, Sun, X, ArrowUpRight } from "lucide-react";
 
+// Assets
 import BrandLogo from "../assets/brand_logo.svg";
 
+// Contexts
 import { ThemeContext } from "../contexts/ThemeContext";
+import { ExternalLinksContext } from "../contexts/ExternalLinksContext";
 
 export default function Navbar() {
+  // useContexts
   const { theme, setTheme } = useContext(ThemeContext);
+  const { externalLinks } = useContext(ExternalLinksContext);
+
+  // State
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Handlers
   const menuButtonHandler = () => {
     setIsMenuOpen((prev) => !prev);
   };
@@ -19,11 +27,9 @@ export default function Navbar() {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  const navLinks = [
-    { title: "Ana Sayfa", href: "/" },
-    { title: "Supplementler", href: "/supplements" },
-    { title: "Proje Hakkında", href: "/project-about" },
-  ];
+  // Datas
+  const { navLinks } = externalLinks;
+  const { relatedProjects } = externalLinks;
 
   return (
     <header className="">
@@ -65,7 +71,7 @@ export default function Navbar() {
         >
           <a
             target="_blank"
-            href="https://github.com/sonatipek/vitamins-and-supplements-frontend"
+            href={relatedProjects[0].href}
             className="group relative flex gap-2 border-r-2 border-light pr-5 text-dark hover:underline dark:border-mid dark:text-light"
           >
             <Github strokeWidth={1.5} /> Repo

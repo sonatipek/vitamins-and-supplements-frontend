@@ -1,10 +1,15 @@
+/* eslint-disable react/no-unescaped-entities */
+import { motion } from "framer-motion";
+import { useContext, useEffect, useState } from "react";
+
+// UI Components
 import Title from "../components/ui/Title";
 import Text from "../components/ui/Text";
 import List from "../components/ui/List";
 import Link from "../components/ui/Link";
 import PreviewCard from "../components/ui/PreviewCard";
 
-// Images
+// Assets
 import ExpressLogo from "../assets/express_logo.svg";
 import ExpressLogoDark from "../assets/expressjs_dark.svg";
 import FigmaLogo from "../assets/figma_logo.svg";
@@ -19,18 +24,13 @@ import VercelLogo from "../assets/vercel_logo.svg";
 import VercelLogoDark from "../assets/vercel_dark.svg";
 import ViteLogo from "../assets/vite_logo.svg";
 
-import {
-  GithubIcon,
-  GlobeIcon,
-  LinkedinIcon,
-  MailIcon,
-  TwitterIcon,
-} from "lucide-react";
+import { MailIcon } from "lucide-react";
 
-import { useContext, useEffect, useState } from "react";
+// Contexts
 import { ThemeContext } from "../contexts/ThemeContext";
-import { motion } from "framer-motion";
+import { ExternalLinksContext } from "../contexts/ExternalLinksContext";
 
+// Framer Options
 const framerContainer = {
   visible: {
     transition: {
@@ -52,11 +52,20 @@ const framerItem = {
 };
 
 export default function ProjectAbout() {
+  // useContexts
   const { theme } = useContext(ThemeContext);
+  const { externalLinks } = useContext(ExternalLinksContext);
+
+  // useStates
   const [activeSection, setActiveSection] = useState(
-    "supplements-and-vitamins"
+    "supplements-and-vitamins",
   );
 
+  // Datas
+  const { contactLinks } = externalLinks;
+  const { relatedProjects } = externalLinks;
+
+  // useEffects
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll("section");
@@ -83,21 +92,21 @@ export default function ProjectAbout() {
       animate={{ opacity: 1 }}
     >
       {/* Left Navigation */}
-      <div className="hidden lg:flex fixed right-4">
+      <div className="fixed right-4 hidden lg:flex">
         <ul className="space-y-4">
           <li className="group">
             <a
               href="#supplements-and-vitamins"
               className={`${
                 activeSection === "supplements-and-vitamins" && "translate-x-14"
-              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
             >
               Supplements & Vitamins
             </a>
             <div
               className={`${
                 activeSection === "supplements-and-vitamins" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
             ></div>
           </li>
 
@@ -106,14 +115,14 @@ export default function ProjectAbout() {
               href="#tech-stack"
               className={`${
                 activeSection === "tech-stack" && "translate-x-14"
-              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
             >
               Teknolojiler ve Araçlar
             </a>
             <div
               className={`${
                 activeSection === "tech-stack" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
             ></div>
           </li>
 
@@ -122,14 +131,14 @@ export default function ProjectAbout() {
               href="#repos"
               className={`${
                 activeSection === "repos" && "translate-x-14"
-              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
             >
               Proje Repoları
             </a>
             <div
               className={`${
                 activeSection === "repos" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
             ></div>
           </li>
 
@@ -138,14 +147,14 @@ export default function ProjectAbout() {
               href="#contribution"
               className={`${
                 activeSection === "contribution" && "translate-x-14"
-              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
             >
               Projelere Katkı
             </a>
             <div
               className={`${
                 activeSection === "contribution" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
             ></div>
           </li>
 
@@ -154,14 +163,14 @@ export default function ProjectAbout() {
               href="#contact"
               className={`${
                 activeSection === "contact" && "translate-x-14"
-              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
             >
               İletişim
             </a>
             <div
               className={`${
                 activeSection === "contact" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
             ></div>
           </li>
 
@@ -170,14 +179,14 @@ export default function ProjectAbout() {
               href="#sources-and-references"
               className={`${
                 activeSection === "sources-and-references" && "translate-x-14"
-              } text-light group-hover:text-mid flex translate-x-20 group-hover:translate-x-0 transition-transform duration-700 delay-75`}
+              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
             >
               Kaynak & Referanslar
             </a>
             <div
               className={`${
                 activeSection === "sources-and-references" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand group-hover:translate-x-0 transition-transform duration-500`}
+              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
             ></div>
           </li>
         </ul>
@@ -215,11 +224,11 @@ export default function ProjectAbout() {
           oldu. Bu deneyim aynı zamanda react-router ile çok sayfalı uygulama ve
           Framer Motion ve Tailwindcss ile animasyonu da içeriyor.
           <br />
-          Bunun yanında Back-end tarafında RESTful API yazma konusunda
-          beceri kazandım ve front-end tarafında verinin nasıl işlendiğini
-          anlamak açısından da faydalı oldu. Dolayısıyla proje geliştirme
-          sürecinde hem front-end hem de back-end çalışmalarında kapsamlı bir
-          bakış açısı kazandığımı söyleyebilirim.
+          Bunun yanında Back-end tarafında RESTful API yazma konusunda beceri
+          kazandım ve front-end tarafında verinin nasıl işlendiğini anlamak
+          açısından da faydalı oldu. Dolayısıyla proje geliştirme sürecinde hem
+          front-end hem de back-end çalışmalarında kapsamlı bir bakış açısı
+          kazandığımı söyleyebilirim.
         </Text>
 
         <div className="mt-6">
@@ -247,7 +256,7 @@ export default function ProjectAbout() {
         </Text>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 mt-6"
+          className="mt-6 grid grid-cols-1 gap-x-6 gap-y-3 md:grid-cols-2 lg:grid-cols-3"
           initial="hidden"
           animate="visible"
           variants={framerContainer}
@@ -258,31 +267,31 @@ export default function ProjectAbout() {
               <img
                 src={ReactLogo}
                 alt="react.js logo"
-                className="cursor-pointer hover:scale-105 duration-700 h-14"
+                className="h-14 cursor-pointer duration-700 hover:scale-105"
               />
 
               <img
                 src={ReactRouterLogo}
                 alt="reactrouter logo"
-                className="cursor-pointer hover:scale-105 duration-700 h-14"
+                className="h-14 cursor-pointer duration-700 hover:scale-105"
               />
 
               <img
                 src={ViteLogo}
                 alt="vite.js logo"
-                className="cursor-pointer hover:scale-105 duration-700 h-14"
+                className="h-14 cursor-pointer duration-700 hover:scale-105"
               />
 
               <img
                 src={theme === "light" ? FramerLogo : FramerLogoDark}
                 alt="framer logo"
-                className="cursor-pointer hover:scale-105 duration-700 h-14"
+                className="h-14 cursor-pointer duration-700 hover:scale-105"
               />
 
               <img
                 src={TailwindLogo}
                 alt="tailwindcss logo"
-                className="cursor-pointer hover:scale-105 duration-700 h-14"
+                className="h-14 cursor-pointer duration-700 hover:scale-105"
               />
             </PreviewCard>
           </motion.div>
@@ -293,19 +302,19 @@ export default function ProjectAbout() {
               <img
                 src={NodeLogo}
                 alt="node.js logo"
-                className="cursor-pointer hover:scale-105 duration-700 h-14"
+                className="h-14 cursor-pointer duration-700 hover:scale-105"
               />
 
               <img
                 src={theme === "light" ? ExpressLogo : ExpressLogoDark}
                 alt="express.js logo"
-                className="cursor-pointer hover:scale-105 duration-700 h-14"
+                className="h-14 cursor-pointer duration-700 hover:scale-105"
               />
 
               <img
                 src={MongoLogo}
                 alt="mongodb logo"
-                className="cursor-pointer hover:scale-105 duration-700 h-14"
+                className="h-14 cursor-pointer duration-700 hover:scale-105"
               />
             </PreviewCard>
           </motion.div>
@@ -316,7 +325,7 @@ export default function ProjectAbout() {
               <img
                 src={theme === "light" ? VercelLogo : VercelLogoDark}
                 alt="vercel logo"
-                className="cursor-pointer hover:scale-105 duration-700 h-14"
+                className="h-14 cursor-pointer duration-700 hover:scale-105"
               />
             </PreviewCard>
           </motion.div>
@@ -327,7 +336,7 @@ export default function ProjectAbout() {
               <img
                 src={FigmaLogo}
                 alt="Figma logo"
-                className="cursor-pointer hover:scale-105 duration-700"
+                className="cursor-pointer duration-700 hover:scale-105"
               />
             </PreviewCard>
           </motion.div>
@@ -346,21 +355,17 @@ export default function ProjectAbout() {
           ve önerileriniz varsa bana iletin.
         </Text>
 
-        <div className="flex gap-5 mt-6">
-          <Link
-            href="https://github.com/sonatipek/vitamins-and-supplements-frontend"
-            target="blank"
-            icon={<GithubIcon />}
-          >
-            Front-end Reposu
-          </Link>
-          <Link
-            href="https://github.com/sonatipek/vitamins-and-supplements-api"
-            target="blank"
-            icon={<GithubIcon />}
-          >
-            Back-end Reposu
-          </Link>
+        <div className="mt-6 flex gap-5">
+          {relatedProjects.map((value, index) => (
+            <Link
+              key={index}
+              href={value.href}
+              target="blank"
+              icon={value.icon}
+            >
+              {value.title}
+            </Link>
+          ))}
         </div>
       </section>
       {/* Github Repos End*/}
@@ -388,27 +393,15 @@ export default function ProjectAbout() {
           iletişime geçebilirisniz.
         </Text>
 
-        <div className="flex gap-3 mt-6">
-          <Link
-            href="https://linkedin.com/in/sonatipek"
-            target="_blank"
-            icon={<LinkedinIcon />}
-          ></Link>
-          <Link
-            href="https://twitter.com/sonatipek"
-            target="_blank"
-            icon={<TwitterIcon />}
-          ></Link>
-          <Link
-            href="https://github.com/sonatipek"
-            target="_blank"
-            icon={<GithubIcon />}
-          ></Link>
-          <Link
-            href="https://sonatipek.com"
-            target="_blank"
-            icon={<GlobeIcon />}
-          ></Link>
+        <div className="mt-6 flex gap-3">
+          {contactLinks.map((value, index) => (
+            <Link
+              key={index}
+              href={value.href}
+              target="_blank"
+              icon={value.icon}
+            ></Link>
+          ))}
           <Link
             href="mailto:sonatsayginipek@gmail.com"
             target="_blank"
@@ -422,7 +415,7 @@ export default function ProjectAbout() {
       <section className="mt-14" id="sources-and-references">
         <Title size="lg">Kaynak & Referanslar</Title>
 
-        <ul className="list-disc ml-6 mt-4 space-y-3">
+        <ul className="ml-6 mt-4 list-disc space-y-3">
           <li className="dark:text-light">
             <Link
               href="https://www.youtube.com/watch?v=z3LFfY3AhVQ"
