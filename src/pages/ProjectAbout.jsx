@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import { twMerge } from "tailwind-merge";
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
 
@@ -65,16 +66,16 @@ export default function ProjectAbout() {
   const { contactLinks } = externalLinks;
   const { relatedProjects } = externalLinks;
 
-  // useEffects
+  // useEffects for scroll spy
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll("section");
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+
       sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
         if (
-          window.scrollY >= sectionTop &&
-          window.scrollY < sectionTop + sectionHeight
+          section.offsetTop <= scrollPosition &&
+          section.offsetTop + section.offsetHeight > scrollPosition
         ) {
           setActiveSection(section.id);
         }
@@ -97,96 +98,110 @@ export default function ProjectAbout() {
           <li className="group">
             <a
               href="#supplements-and-vitamins"
-              className={`${
-                activeSection === "supplements-and-vitamins" && "translate-x-14"
-              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
+              className={twMerge(
+                "flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid",
+                activeSection === "supplements-and-vitamins" &&
+                  "translate-x-14",
+              )}
             >
               Supplements & Vitamins
             </a>
             <div
-              className={`${
-                activeSection === "supplements-and-vitamins" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
+              className={twMerge(
+                "h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0",
+                activeSection === "supplements-and-vitamins" &&
+                  "translate-x-14",
+              )}
             ></div>
           </li>
 
           <li className="group">
             <a
               href="#tech-stack"
-              className={`${
-                activeSection === "tech-stack" && "translate-x-14"
-              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
+              className={twMerge(
+                "flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid",
+                activeSection === "tech-stack" && "translate-x-14",
+              )}
             >
               Teknolojiler ve Araçlar
             </a>
             <div
-              className={`${
-                activeSection === "tech-stack" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
+              className={twMerge(
+                "h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0",
+                activeSection === "tech-stack" && "translate-x-14",
+              )}
             ></div>
           </li>
 
           <li className="group">
             <a
               href="#repos"
-              className={`${
-                activeSection === "repos" && "translate-x-14"
-              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
+              className={twMerge(
+                "flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid",
+                activeSection === "repos" && "translate-x-14",
+              )}
             >
               Proje Repoları
             </a>
             <div
-              className={`${
-                activeSection === "repos" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
+              className={twMerge(
+                "h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0",
+                activeSection === "repos" && "translate-x-14",
+              )}
             ></div>
           </li>
 
           <li className="group">
             <a
               href="#contribution"
-              className={`${
-                activeSection === "contribution" && "translate-x-14"
-              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
+              className={twMerge(
+                "flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid",
+                activeSection === "contribution" && "translate-x-14",
+              )}
             >
               Projelere Katkı
             </a>
             <div
-              className={`${
-                activeSection === "contribution" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
+              className={twMerge(
+                "h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0",
+                activeSection === "contribution" && "translate-x-14",
+              )}
             ></div>
           </li>
 
           <li className="group">
             <a
               href="#contact"
-              className={`${
-                activeSection === "contact" && "translate-x-14"
-              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
+              className={twMerge(
+                "flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid",
+                activeSection === "contact" && "translate-x-14",
+              )}
             >
               İletişim
             </a>
             <div
-              className={`${
-                activeSection === "contact" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
+              className={twMerge(
+                "h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0",
+                activeSection === "contact" && "translate-x-14",
+              )}
             ></div>
           </li>
 
           <li className="group">
             <a
               href="#sources-and-references"
-              className={`${
-                activeSection === "sources-and-references" && "translate-x-14"
-              } flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid`}
+              className={twMerge(
+                "flex translate-x-20 text-light transition-transform delay-75 duration-700 group-hover:translate-x-0 group-hover:text-mid",
+                activeSection === "sources-and-references" && "translate-x-14",
+              )}
             >
               Kaynak & Referanslar
             </a>
             <div
-              className={`${
-                activeSection === "sources-and-references" && "translate-x-14"
-              } h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0`}
+              className={twMerge(
+                "h-1 w-full translate-x-20 bg-brand transition-transform duration-500 group-hover:translate-x-0",
+                activeSection === "sources-and-references" && "translate-x-14",
+              )}
             ></div>
           </li>
         </ul>
@@ -250,7 +265,7 @@ export default function ProjectAbout() {
       {/* Tech Stack  */}
       <motion.section className="mt-14" id="tech-stack">
         <Title size="lg">Teknoloji ve Araçlar</Title>
-        <Text className="mt-4" type="subtext">
+        <Text className="mt-4" isSubtext>
           Proje genelinde kullandığım tüm teknoloji ve araçlar setini aşağıda
           bulabilirsiniz.
         </Text>
