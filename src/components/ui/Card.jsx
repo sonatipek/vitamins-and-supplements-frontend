@@ -1,11 +1,11 @@
 export default function Card({ icon, title, children }) {
   return (
-    <div className="py-3 px-6 flex flex-col items-center justify-center mt-12">
+    <div className="mt-12 flex flex-col items-center justify-center px-6 py-3">
       <span className="text-brand">{icon}</span>
-      <div className="flex gap-3 mt-4">
-        <h3 className="font-semibold text-base text-brand ">{title}</h3>
+      <div className="mt-4 flex gap-3">
+        <h3 className="text-base font-semibold text-brand ">{title}</h3>
       </div>
-      <p className="text-mid mt-1 text-sm">{children}</p>
+      <p className="mt-1 text-sm text-mid">{children}</p>
     </div>
   );
 }

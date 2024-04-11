@@ -34,14 +34,14 @@ export default function Hero() {
       </div>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8 md:mt-0 lg:-mt-1 xl:-mt-12">
-        <Link href="/supplements" type="button">
+        <Link href="/supplements" variant="primary-button">
           Hemen Keşfet
         </Link>
 
         <Link
           href="https://linkedin.com/in/sonatipek"
           target="_blank"
-          classname="!text-brand !no-underline !font-semibold group"
+          variant="primary-link"
         >
           İş Birliği
           <ChevronRight

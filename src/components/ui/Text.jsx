@@ -1,14 +1,15 @@
-export default function Text({ children, type, className }) {
-    return (
-      <p
-        className={`leading-5 ${
-          type === "subtext"
-            ? "text-xs text-mid dark:text-light leading-normal"
-            : "text-base text-dark dark:text-light"
-        } ${className}`}
-      >
-        {children}
-      </p>
-    );
-  }
-  
+import { twMerge } from "tailwind-merge";
+
+export default function Text({ children, isSubtext, className }) {
+  return (
+    <p
+      className={twMerge(
+        "text-base leading-5 text-dark dark:text-light",
+        isSubtext && "text-xs leading-normal text-mid dark:text-light",
+        className,
+      )}
+    >
+      {children}
+    </p>
+  );
+}

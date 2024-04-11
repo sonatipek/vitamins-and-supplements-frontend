@@ -19,9 +19,9 @@ export default function Modal({ supplement, setIsOpen, isOpen }) {
       <div className="fixed inset-0 w-screen overflow-y-auto">
         {/* Container to center the panel */}
         <div className="flex min-h-full items-center justify-center p-3">
-          <Dialog.Panel className="w-full max-w-2xl bg-white dark:bg-dark py-6 shadow-2xl rounded-xl">
+          <Dialog.Panel className="w-full max-w-2xl rounded-xl bg-white py-6 shadow-2xl dark:bg-dark">
             {/* head */}
-            <div className="flex justify-between items-center px-6">
+            <div className="flex items-center justify-between px-6">
               <Title size="lg">{supplement.name}</Title>
               <button onClick={() => setIsOpen(false)}>
                 <XIcon size={32} className="dark:text-light" />
@@ -29,47 +29,53 @@ export default function Modal({ supplement, setIsOpen, isOpen }) {
             </div>
             {/* head end */}
 
-            <div className="px-6 mt-2">
-              <Title type="sm" className="!text-brand font-semibold">{supplement.recommendation}</Title>
-              
-              <div className="w-full flex justify-start items-center gap-2 mt-3">
+            <div className="mt-2 px-6">
+              <Title type="sm" className="font-semibold !text-brand">
+                {supplement.recommendation}
+              </Title>
+
+              <div className="mt-3 flex w-full items-center justify-start gap-2">
                 {supplement.tags.map((value, index) => (
-                  <Badge key={index}>{value}</Badge>
+                  <Badge className="font-medium" key={index}><span className="before:content-['+'] before:mr-1 px-2">{value}</span></Badge>
                 ))}
               </div>
             </div>
 
-            <div className="w-full flex mt-6">
-              <div className="w-full bg-brand px-3 py-3 md:px-6 text-white shadow">
-                <h5 className="text-white font-bold">Faydaları</h5>
+            <div className="mt-6 flex w-full">
+              <div className="w-full bg-brand px-3 py-3 text-white shadow md:px-6">
+                <h5 className="font-bold text-white">Faydaları</h5>
 
-                <ul className="list-disc ml-4 md:ml-5 mt-2">
+                <ul className="ml-4 mt-2 list-disc md:ml-5">
                   {supplement.benefits.map((value, index) => (
-                    <li key={index} className="text-pretty">{value}</li>
+                    <li key={index} className="text-pretty">
+                      {value}
+                    </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="w-full px-3 py-3 md:px-6 shadow">
+              <div className="w-full px-3 py-3 shadow md:px-6">
                 <h5 className="font-bold">Kim Kullanmalı?</h5>
 
-                <ul className="list-disc ml-4 md:ml-5 mt-2">
+                <ul className="ml-4 mt-2 list-disc md:ml-5">
                   {supplement.whoShouldUse.map((value, index) => (
-                    <li key={index} className="text-pretty">{value}</li>
+                    <li key={index} className="text-pretty">
+                      {value}
+                    </li>
                   ))}
                 </ul>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 mt-6 gap-3 md:gap-12 px-6">
-              <div className="py-2 px-4 shadow flex items-center gap-2 w-full dark:shadow-sm dark:shadow-darkest">
-                <PillIcon className="text-brand"/>
+            <div className="mt-6 grid grid-cols-1 gap-3 px-6 sm:grid-cols-2 md:gap-12">
+              <div className="flex w-full items-center gap-2 px-4 py-2 shadow dark:shadow-sm dark:shadow-darkest">
+                <PillIcon className="text-brand" />
                 <div className="ml-3">
                   <Title className="font-normal">Doz</Title>
                   <Text className="text-mid">{supplement.dose}</Text>
                 </div>
               </div>
-              <div className="py-2 px-4 shadow flex items-center gap-2 dark:shadow-sm dark:shadow-darkest">
+              <div className="flex items-center gap-2 px-4 py-2 shadow dark:shadow-sm dark:shadow-darkest">
                 <Clock10Icon className="text-brand" />
                 <div className="ml-3">
                   <Title className="font-normal">Zamanlama</Title>
@@ -78,7 +84,7 @@ export default function Modal({ supplement, setIsOpen, isOpen }) {
               </div>
             </div>
             {/* footer */}
-            <div className="border-t mt-10 pt-3 px-3 md:px-6 dark:border-mid">
+            <div className="mt-10 border-t px-3 pt-3 dark:border-mid md:px-6">
               <Title size="md" className="font-medium">
                 Öneriler
               </Title>

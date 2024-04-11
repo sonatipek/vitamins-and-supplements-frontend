@@ -34,7 +34,7 @@ export default function Footer() {
               width={32}
             />
           </a>
-          <Text type="subtext" className="mt-3">
+          <Text isSubtext className="mt-3">
             Bu site üzerinde bulunan bilgiler, herhangi bir kullanım tavsiyesi
             içermez. Sağlığınızla ilgili herhangi bir değişiklik yapmadan önce
             doktorunuza danışmanız önemlidir.
@@ -94,7 +94,7 @@ export default function Footer() {
           </a>
         </Text>
 
-        <Text type="subtext">
+        <Text isSubtext>
           Vitamins and Supplements is{" "}
           <Link
             href="https://github.com/sonatipek/vitamins-and-supplements-frontend/blob/main/LICENSE"

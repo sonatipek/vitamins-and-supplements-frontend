@@ -54,7 +54,7 @@ export function Supplements() {
       "https://vitamins-and-supplements.vercel.app/api/category/supplements",
       {
         headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
-      }
+      },
     )
       .then((response) => response.json())
       .then((json) => setCategories(json));
@@ -68,11 +68,11 @@ export function Supplements() {
         : "https://vitamins-and-supplements.vercel.app/api/vitamin",
       {
         headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
-      }
+      },
     )
       .then((response) => response.json())
       .then((json) =>
-        json.success == false ? setVitamins([]) : setVitamins(json)
+        json.success == false ? setVitamins([]) : setVitamins(json),
       );
   }, [selectedCategory]);
 
@@ -84,7 +84,7 @@ export function Supplements() {
         : "https://vitamins-and-supplements.vercel.app/api/supplement",
       {
         headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
-      }
+      },
     )
       .then((response) => response.json())
       .then((json) => setSupplements(json));
@@ -100,11 +100,11 @@ export function Supplements() {
         : "https://vitamins-and-supplements.vercel.app/api/vitamin",
       {
         headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
-      }
+      },
     )
       .then((response) => response.json())
       .then((json) =>
-        json.success == false ? setVitamins([]) : setVitamins(json)
+        json.success == false ? setVitamins([]) : setVitamins(json),
       );
 
     fetch(
@@ -114,11 +114,11 @@ export function Supplements() {
         : "https://vitamins-and-supplements.vercel.app/api/supplement",
       {
         headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
-      }
+      },
     )
       .then((response) => response.json())
       .then((json) =>
-        json.success == false ? setSupplements([]) : setSupplements(json)
+        json.success == false ? setSupplements([]) : setSupplements(json),
       );
   }
 
@@ -129,7 +129,7 @@ export function Supplements() {
       })
         .then((response) => response.json())
         .then((json) =>
-          json.success == false ? setSupplements([]) : setSupplements(json)
+          json.success == false ? setSupplements([]) : setSupplements(json),
         );
 
       fetch("https://vitamins-and-supplements.vercel.app/api/vitamin", {
@@ -137,7 +137,7 @@ export function Supplements() {
       })
         .then((response) => response.json())
         .then((json) =>
-          json.success == false ? setVitamins([]) : setVitamins(json)
+          json.success == false ? setVitamins([]) : setVitamins(json),
         );
     }
   }
@@ -150,31 +150,31 @@ export function Supplements() {
     >
       <form
         action="#"
-        className="flex items-center justify-center mb-14 mt-28 px-6 lg:px-56"
+        className="mb-14 mt-28 flex items-center justify-center px-6 lg:px-56"
         onSubmit={(e) => searchTrigger(e)}
       >
         <input
           type="text"
-          className="border rounded-l-md border-darkest dark:border-white px-3 py-2 w-full bg-transparent text-darkest dark:text-white placeholder:text-mid focus:ring-0 focus:outline-none"
+          className="w-full rounded-l-md border border-darkest bg-transparent px-3 py-2 text-darkest placeholder:text-mid focus:outline-none focus:ring-0 dark:border-white dark:text-white"
           placeholder="Supplement Ara"
           onKeyUp={(e) => searchKeyUpTrigger(e)}
         />
         <button
           type="submit"
-          className="border rounded-r-md border-darkest bg-white dark:border-white px-3 py-2 bg-transparent text-dark font-medium"
+          className="rounded-r-md border border-darkest bg-transparent bg-white px-3 py-2 font-medium text-dark dark:border-white"
         >
           Ara
         </button>
       </form>
       <Tab.Group>
-        <Tab.List className="border-b border-light dark:border-dark flex gap-5 overflow-x-auto">
+        <Tab.List className="flex gap-5 overflow-x-auto border-b border-light dark:border-dark">
           {tabs.map((value, index) => (
             <Tab key={index} as={Fragment}>
               {({ selected }) => (
                 <button
-                  className={`flex justify-center items-center gap-2 px-1 py-2 ${
+                  className={`flex items-center justify-center gap-2 px-1 py-2 ${
                     selected
-                      ? "text-brand font-medium border-b-2 border-brand"
+                      ? "border-b-2 border-brand font-medium text-brand"
                       : "text-mid hover:text-dark dark:hover:text-light"
                   }`}
                 >
@@ -193,10 +193,7 @@ export function Supplements() {
             <Badge
               key={item}
               onClick={(e) => setSelectedCategory(e.target.innerHTML)}
-              className={
-                selectedCategory === item &&
-                "!bg-brand !border-brand !text-white !font-medium"
-              }
+              isSelected={selectedCategory === item}
             >
               {item}
             </Badge>
@@ -222,7 +219,7 @@ export function Supplements() {
                   variants={framerContainer}
                   initial="hidden"
                   animate="visible"
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                 >
                   {vitamins &&
                     vitamins.map((value, index) => {
@@ -234,17 +231,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -253,13 +247,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -274,10 +268,10 @@ export function Supplements() {
                       } else {
                         let supplementSuggestions = supplements.filter(
                           (supplement) =>
-                            supplement.recommendation === "Öneririz"
+                            supplement.recommendation === "Öneririz",
                         );
                         let vitaminSuggestions = vitamins.filter(
-                          (vitamin) => vitamin.recommendation === "Öneririz"
+                          (vitamin) => vitamin.recommendation === "Öneririz",
                         );
 
                         if (
@@ -317,17 +311,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -336,13 +327,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -366,7 +357,7 @@ export function Supplements() {
                   variants={framerContainer}
                   initial="hidden"
                   animate="visible"
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                 >
                   {supplements &&
                     supplements.map((value, index) => {
@@ -378,17 +369,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -397,13 +385,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -418,11 +406,11 @@ export function Supplements() {
                       } else {
                         let supplementSuggestions = supplements.filter(
                           (supplement) =>
-                            supplement.recommendation === "Öncelikli Değil"
+                            supplement.recommendation === "Öncelikli Değil",
                         );
                         let vitaminSuggestions = vitamins.filter(
                           (vitamin) =>
-                            vitamin.recommendation === "Öncelikli Değil"
+                            vitamin.recommendation === "Öncelikli Değil",
                         );
 
                         if (
@@ -462,17 +450,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -481,13 +466,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -511,7 +496,7 @@ export function Supplements() {
                   variants={framerContainer}
                   initial="hidden"
                   animate="visible"
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"
+                  className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                 >
                   {supplements &&
                     supplements.map((value, index) => {
@@ -525,17 +510,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -544,13 +526,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -566,12 +548,12 @@ export function Supplements() {
                         let supplementSuggestions = supplements.filter(
                           (supplement) =>
                             supplement.recommendation ===
-                            "Özel Durumlarda Alınabilir"
+                            "Özel Durumlarda Alınabilir",
                         );
                         let vitaminSuggestions = vitamins.filter(
                           (vitamin) =>
                             vitamin.recommendation ===
-                            "Özel Durumlarda Alınabilir"
+                            "Özel Durumlarda Alınabilir",
                         );
 
                         if (
@@ -613,17 +595,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -632,13 +611,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -666,13 +645,13 @@ export function Supplements() {
                 animate={{ scale: 1 }}
                 className="col-span-3"
               >
-                <Title size="sm" className="text-center mb-12">
+                <Title size="sm" className="mb-12 text-center">
                   Aradığınız kriterler için bir supplement bulunmuyor.
                 </Title>
                 <img
                   src={NoData}
                   alt="no data illustration"
-                  className="w-1/4 mx-auto"
+                  className="mx-auto w-1/4"
                 />
               </motion.div>
             )}
@@ -687,7 +666,7 @@ export function Supplements() {
                   variants={framerContainer}
                   initial="hidden"
                   animate="visible"
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                 >
                   {supplements &&
                     supplements.map((value, index) => {
@@ -699,17 +678,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -718,13 +694,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -739,7 +715,7 @@ export function Supplements() {
                       } else {
                         let suggestions = supplements.filter(
                           (supplement) =>
-                            supplement.recommendation === "Öneririz"
+                            supplement.recommendation === "Öneririz",
                         );
 
                         if (suggestions.length === 0 && index === 0) {
@@ -775,7 +751,7 @@ export function Supplements() {
                   variants={framerContainer}
                   initial="hidden"
                   animate="visible"
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                 >
                   {supplements &&
                     supplements.map((value, index) => {
@@ -787,17 +763,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -806,13 +779,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -827,7 +800,7 @@ export function Supplements() {
                       } else {
                         let suggestions = supplements.filter(
                           (supplement) =>
-                            supplement.recommendation === "Öncelikli Değil"
+                            supplement.recommendation === "Öncelikli Değil",
                         );
 
                         if (suggestions.length === 0 && index === 0) {
@@ -863,7 +836,7 @@ export function Supplements() {
                   variants={framerContainer}
                   initial="hidden"
                   animate="visible"
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"
+                  className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                 >
                   {supplements &&
                     supplements.map((value, index) => {
@@ -877,17 +850,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -896,13 +866,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -918,7 +888,7 @@ export function Supplements() {
                         let suggestions = supplements.filter(
                           (supplement) =>
                             supplement.recommendation ===
-                            "Özel Durumlarda Alınabilir"
+                            "Özel Durumlarda Alınabilir",
                         );
 
                         if (suggestions.length === 0 && index === 0) {
@@ -958,13 +928,13 @@ export function Supplements() {
                 animate={{ scale: 1 }}
                 className="col-span-3"
               >
-                <Title size="sm" className="text-center mb-12">
+                <Title size="sm" className="mb-12 text-center">
                   Aradığınız kriterler için bir vitamin bulunmuyor.
                 </Title>
                 <img
                   src={NoData}
                   alt="no data illustration"
-                  className="w-1/4 mx-auto"
+                  className="mx-auto w-1/4"
                 />
               </motion.div>
             )}
@@ -978,7 +948,7 @@ export function Supplements() {
                   variants={framerContainer}
                   initial="hidden"
                   animate="visible"
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                 >
                   {vitamins &&
                     vitamins.map((value, index) => {
@@ -990,17 +960,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -1009,13 +976,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -1029,7 +996,7 @@ export function Supplements() {
                         );
                       } else {
                         let suggestions = vitamins.filter(
-                          (vitamin) => vitamin.recommendation === "Öneririz"
+                          (vitamin) => vitamin.recommendation === "Öneririz",
                         );
 
                         if (suggestions.length === 0 && index === 0) {
@@ -1065,7 +1032,7 @@ export function Supplements() {
                   variants={framerContainer}
                   initial="hidden"
                   animate="visible"
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                 >
                   {vitamins &&
                     vitamins.map((value, index) => {
@@ -1077,17 +1044,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -1096,13 +1060,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -1117,7 +1081,7 @@ export function Supplements() {
                       } else {
                         let suggestions = vitamins.filter(
                           (vitamin) =>
-                            vitamin.recommendation === "Öncelikli Değil"
+                            vitamin.recommendation === "Öncelikli Değil",
                         );
 
                         if (suggestions.length === 0 && index === 0) {
@@ -1154,7 +1118,7 @@ export function Supplements() {
                   variants={framerContainer}
                   initial="hidden"
                   animate="visible"
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-12"
+                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                 >
                   {vitamins &&
                     vitamins.map((value, index) => {
@@ -1168,17 +1132,14 @@ export function Supplements() {
                             className="flex flex-col items-start justify-between"
                           >
                             <div>
-                              <Text
-                                type="subtext"
-                                className="font-bold !text-brand"
-                              >
+                              <Text isSubtext className="font-bold !text-brand">
                                 {value.recommendation}
                               </Text>
-                              <Title className="font-semibold text-2xl">
+                              <Title className="text-2xl font-semibold">
                                 {value.name}
                               </Title>
                               <Text
-                                type="subtext"
+                                isSubtext
                                 className="mt-2 line-clamp-2 !text-base"
                               >
                                 {value.suggestions[0]}
@@ -1187,13 +1148,13 @@ export function Supplements() {
 
                             <button
                               onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="mt-4 !text-brand font-semibold flex items-center justify-center group"
+                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
                               id={value.name}
                             >
                               Detayları Gör
                               <ChevronRight
                                 size={16}
-                                className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
                               />
                             </button>
 
@@ -1209,7 +1170,7 @@ export function Supplements() {
                         let suggestions = vitamins.filter(
                           (vitamin) =>
                             vitamin.recommendation ===
-                            "Özel Durumlarda Alınabilir"
+                            "Özel Durumlarda Alınabilir",
                         );
 
                         if (suggestions.length === 0 && index === 0) {
@@ -1253,7 +1214,7 @@ export async function SupplementsLoader() {
       headers: {
         "X-Auth-Token": import.meta.env.VITE_API_TOKEN,
       },
-    }
+    },
   );
   const vitamins = await axios.get(
     "https://vitamins-and-supplements.vercel.app/api/vitamin",
@@ -1261,7 +1222,7 @@ export async function SupplementsLoader() {
       headers: {
         "X-Auth-Token": import.meta.env.VITE_API_TOKEN,
       },
-    }
+    },
   );
 
   return [...vitamins.data, ...supplements.data];

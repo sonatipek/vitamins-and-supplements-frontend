@@ -11,11 +11,23 @@ export default function ErrorPage() {
     <>
       {error.status === 404 ? (
         <div className="flex flex-col items-center justify-center">
-          <Title className="font-semibold text-center mt-12" size="lg">Sanırım kayboldun! Aramak istediğin şeyi bulamadık.</Title>
-          <img src={NotFound} alt="not found page" className="w-100 sm:w-3/4 md:w-2/4 mx-auto mt-12" />
-         
-          <Link href="/" icon={<HomeIcon />} type="button" classname="cursor-pointer mt-12">Ana Sayfaya Dön</Link>
-    
+          <Title className="mt-12 text-center font-semibold" size="lg">
+            Sanırım kayboldun! Aramak istediğin şeyi bulamadık.
+          </Title>
+          <img
+            src={NotFound}
+            alt="not found page"
+            className="w-100 mx-auto mt-12 sm:w-3/4 md:w-2/4"
+          />
+
+          <Link
+            href="/"
+            icon={<HomeIcon />}
+            type="button"
+            className="mt-12 cursor-pointer"
+          >
+            Ana Sayfaya Dön
+          </Link>
         </div>
       ) : (
         <div id="error-page">
