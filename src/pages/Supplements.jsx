@@ -66,6 +66,11 @@ export function Supplements() {
   }, [selectedCategory]);
 
   // Event Functions
+  function categoryClickHandler(element) {
+    setSelectedCategory(element.innerHTML);
+    document.querySelector("input").value = ""; //clear if the search field is full when a category is selected
+  }
+
   function searchTrigger(e) {
     e.preventDefault();
 
@@ -99,6 +104,8 @@ export function Supplements() {
   }
 
   function searchKeyUpTrigger(e) {
+    setSelectedCategory(); //if there is a category selected when the search state starts, cancel it
+
     if (e.target.value === "") {
       fetch("https://vitamins-and-supplements.vercel.app/api/supplement", {
         headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
@@ -169,7 +176,7 @@ export function Supplements() {
           {categories.map((item) => (
             <Badge
               key={item}
-              onClick={(e) => setSelectedCategory(e.target.innerHTML)}
+              onClick={(e) => categoryClickHandler(e.target)}
               isSelected={selectedCategory === item}
             >
               {item}
@@ -184,15 +191,26 @@ export function Supplements() {
         </ul>
         {/* End Categories */}
 
-
         <Tab.Panels className="mt-14">
           {/* General Tab */}
           <Tab.Panel>
             {(vitamins.length !== 0 || supplements.length !== 0) && (
               <div>
-                <SupplementList data={[supplements, vitamins]} isAllTab recommendation="Öneririz"/>
-                <SupplementList data={[supplements, vitamins]} isAllTab recommendation="Öncelikli Değil"/>
-                <SupplementList data={[supplements, vitamins]} isAllTab recommendation="Özel Durumlarda Alınabilir"/>
+                <SupplementList
+                  data={[supplements, vitamins]}
+                  isAllTab
+                  recommendation="Öneririz"
+                />
+                <SupplementList
+                  data={[supplements, vitamins]}
+                  isAllTab
+                  recommendation="Öncelikli Değil"
+                />
+                <SupplementList
+                  data={[supplements, vitamins]}
+                  isAllTab
+                  recommendation="Özel Durumlarda Alınabilir"
+                />
               </div>
             )}
           </Tab.Panel>
