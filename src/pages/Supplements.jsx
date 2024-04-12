@@ -51,7 +51,7 @@ export function Supplements() {
 
   useEffect(() => {
     fetch(
-      "https://vitamins-and-supplements.vercel.app/api/category/supplements",
+      "https://vitamins-and-supplements.vercel.app/api/category",
       {
         headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
       },
