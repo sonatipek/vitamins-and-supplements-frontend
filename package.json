@@ -12,7 +12,6 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@vercel/analytics": "^1.2.2",
-    "axios": "^1.6.7",
     "framer-motion": "^11.0.20",
     "lucide-react": "^0.323.0",
     "react": "^18.2.0",
