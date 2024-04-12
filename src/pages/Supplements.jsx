@@ -23,6 +23,7 @@ export function Supplements() {
   const [vitamins, setVitamins] = useState([]);
   const [supplements, setSupplements] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   // fetch Categories
   useEffect(() => {
@@ -30,7 +31,8 @@ export function Supplements() {
       headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
     })
       .then((response) => response.json())
-      .then((json) => setCategories(json));
+      .then((json) => setCategories(json))
+      .then(() => setIsLoading(false));
   }, []);
 
   // fetch Vitamins by Selected Category
@@ -168,125 +170,153 @@ export function Supplements() {
           ))}
         </Tab.List>
 
-        {/* Categories */}
-        <Title size="md" className="mt-6">
-          Kategoriler
-        </Title>
-        <ul className="mt-3">
-          {categories.map((item) => (
-            <Badge
-              key={item}
-              onClick={(e) => categoryClickHandler(e.target)}
-              isSelected={selectedCategory === item}
-            >
-              {item}
-            </Badge>
-          ))}
-          <button
-            className="ml-6 text-brand hover:text-brand/80"
-            onClick={() => setSelectedCategory()}
-          >
-            Filtreyi Temizle
-          </button>
-        </ul>
-        {/* End Categories */}
-
-        <Tab.Panels className="mt-14">
-          {/* General Tab */}
-          <Tab.Panel>
-            {(vitamins.length !== 0 || supplements.length !== 0) && (
-              <div>
-                <SupplementList
-                  data={[supplements, vitamins]}
-                  isAllTab
-                  recommendation="Öneririz"
-                />
-                <SupplementList
-                  data={[supplements, vitamins]}
-                  isAllTab
-                  recommendation="Öncelikli Değil"
-                />
-                <SupplementList
-                  data={[supplements, vitamins]}
-                  isAllTab
-                  recommendation="Özel Durumlarda Alınabilir"
-                />
-              </div>
-            )}
-          </Tab.Panel>
-          {/* General Tab End */}
-
-          {/* Supplements Tab */}
-          <Tab.Panel>
-            {supplements.length === 0 && (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="col-span-3"
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            {/* Categories */}
+            <Title size="md" className="mt-6">
+              Kategoriler
+            </Title>
+            <ul className="mt-3">
+              {categories.map((item) => (
+                <Badge
+                  key={item}
+                  onClick={(e) => categoryClickHandler(e.target)}
+                  isSelected={selectedCategory === item}
+                >
+                  {item}
+                </Badge>
+              ))}
+              <button
+                className="ml-6 text-brand hover:text-brand/80"
+                onClick={() => setSelectedCategory()}
               >
-                <Title size="sm" className="mb-12 text-center">
-                  Aradığınız kriterler için bir supplement bulunmuyor.
-                </Title>
-                <img
-                  src={NoData}
-                  alt="no data illustration"
-                  className="mx-auto w-1/4"
-                />
-              </motion.div>
-            )}
+                Filtreyi Temizle
+              </button>
+            </ul>
+            {/* End Categories */}
 
-            {supplements.length !== 0 && (
-              <div>
-                <SupplementList data={supplements} recommendation="Öneririz" />
-                <SupplementList
-                  data={supplements}
-                  recommendation="Öncelikli Değil"
-                />
-                <SupplementList
-                  data={supplements}
-                  recommendation="Özel Durumlarda Alınabilir"
-                />
-              </div>
-            )}
-          </Tab.Panel>
-          {/* Supplements Tab End */}
+            <Tab.Panels className="mt-14">
+              {/* General Tab */}
+              <Tab.Panel>
+                {(vitamins.length !== 0 || supplements.length !== 0) && (
+                  <div>
+                    <SupplementList
+                      data={[supplements, vitamins]}
+                      isAllTab
+                      recommendation="Öneririz"
+                    />
+                    <SupplementList
+                      data={[supplements, vitamins]}
+                      isAllTab
+                      recommendation="Öncelikli Değil"
+                    />
+                    <SupplementList
+                      data={[supplements, vitamins]}
+                      isAllTab
+                      recommendation="Özel Durumlarda Alınabilir"
+                    />
+                  </div>
+                )}
+              </Tab.Panel>
+              {/* General Tab End */}
 
-          {/* Vitamins Tab */}
-          <Tab.Panel>
-            {vitamins.length === 0 && (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="col-span-3"
-              >
-                <Title size="sm" className="mb-12 text-center">
-                  Aradığınız kriterler için bir vitamin bulunmuyor.
-                </Title>
-                <img
-                  src={NoData}
-                  alt="no data illustration"
-                  className="mx-auto w-1/4"
-                />
-              </motion.div>
-            )}
+              {/* Supplements Tab */}
+              <Tab.Panel>
+                {supplements.length === 0 && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="col-span-3"
+                  >
+                    <Title size="sm" className="mb-12 text-center">
+                      Aradığınız kriterler için bir supplement bulunmuyor.
+                    </Title>
+                    <img
+                      src={NoData}
+                      alt="no data illustration"
+                      className="mx-auto w-1/4"
+                    />
+                  </motion.div>
+                )}
 
-            {vitamins.length !== 0 && (
-              <div>
-                <SupplementList data={vitamins} recommendation="Öneririz" />
-                <SupplementList
-                  data={vitamins}
-                  recommendation="Öncelikli Değil"
-                />
-                <SupplementList
-                  data={vitamins}
-                  recommendation="Özel Durumlarda Alınabilir"
-                />
-              </div>
-            )}
-          </Tab.Panel>
-          {/* Vitamins Tab End */}
-        </Tab.Panels>
+                {supplements.length !== 0 && (
+                  <div>
+                    <SupplementList
+                      data={supplements}
+                      recommendation="Öneririz"
+                    />
+                    <SupplementList
+                      data={supplements}
+                      recommendation="Öncelikli Değil"
+                    />
+                    <SupplementList
+                      data={supplements}
+                      recommendation="Özel Durumlarda Alınabilir"
+                    />
+                  </div>
+                )}
+              </Tab.Panel>
+              {/* Supplements Tab End */}
+
+              {/* Vitamins Tab */}
+              <Tab.Panel>
+                {vitamins.length === 0 && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="col-span-3"
+                  >
+                    <Title size="sm" className="mb-12 text-center">
+                      Aradığınız kriterler için bir vitamin bulunmuyor.
+                    </Title>
+                    <img
+                      src={NoData}
+                      alt="no data illustration"
+                      className="mx-auto w-1/4"
+                    />
+                  </motion.div>
+                )}
+
+                {vitamins.length !== 0 && (
+                  <div>
+                    <SupplementList data={vitamins} recommendation="Öneririz" />
+                    <SupplementList
+                      data={vitamins}
+                      recommendation="Öncelikli Değil"
+                    />
+                    <SupplementList
+                      data={vitamins}
+                      recommendation="Özel Durumlarda Alınabilir"
+                    />
+                  </div>
+                )}
+              </Tab.Panel>
+              {/* Vitamins Tab End */}
+            </Tab.Panels>
+          </>
+        )}
       </Tab.Group>
     </motion.section>
+  );
+}
+
+function Loading() {
+  return (
+    <div className="mx-auto w-96">
+      <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" className="animate-spin w-80">
+        <circle
+          cx="400"
+          cy="400"
+          fill="none"
+          r="200"
+          strokeWidth="50"
+          stroke="#ef4444"
+          strokeDasharray="700 1400"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
   );
 }
