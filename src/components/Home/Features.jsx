@@ -1,12 +1,18 @@
-import { Users, Info, ShieldCheck, ChevronRight } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 // UI Components
-import Card from "./ui/Card";
-import Illustration from "../assets/feature_illustration.svg";
-import Title from "./ui/Title";
-import Text from "./ui/Text";
-import Link from "./ui/Link";
+import Card from "../ui/Card";
+import Title from "../ui/Title";
+import Text from "../ui/Text";
+import Link from "../ui/Link";
 
+// Assets
+import Illustration from "../../assets/feature_illustration.svg";
+
+// Icons
+import { Users, Info, ShieldCheck, ChevronRight } from "lucide-react";
+
+// Data
 const featuresList = [
   {
     icon: <Users />,
@@ -25,6 +31,21 @@ const featuresList = [
   },
 ];
 
+// Sub Component
+function GradientSubTitle({ children, className }) {
+  return (
+    <Title
+      className={twMerge(
+        "bg-gradient-to-r from-brand to-darkBrand bg-clip-text font-bold text-transparent dark:text-transparent",
+        className,
+      )}
+    >
+      {children}
+    </Title>
+  );
+}
+
+//* Main Component
 export default function Features() {
   return (
     <section className="relative mt-24 overflow-hidden pb-7 pt-14 md:pb-14 md:pt-28">
@@ -35,10 +56,8 @@ export default function Features() {
       />
 
       <div className="container flex flex-col items-center text-center">
-        <Title className="bg-gradient-to-r from-brand to-darkBrand bg-clip-text !font-bold text-transparent dark:text-transparent">
-          Amacımız ne?
-        </Title>
-        <Title size="lg" className="!font-bold">
+        <GradientSubTitle>Amacımız ne ?</GradientSubTitle>
+        <Title size="lg" className="font-bold">
           Gerçekten İhtiyaç Mı?
         </Title>
         <Text className="mt-2 px-1 text-xl text-mid md:px-6 lg:px-12 xl:px-36">
@@ -50,9 +69,9 @@ export default function Features() {
           daha kolay oluşturmasını sağlamak amacıyla oluşturulmuştur.
         </Text>
 
-        <Title className="mb-2 mt-14 bg-gradient-to-r from-brand to-darkBrand bg-clip-text !font-bold text-transparent dark:text-transparent">
-          Takviyelere ne kadar ihtiyacınız var?
-        </Title>
+        <GradientSubTitle className="mb-2 mt-14">
+          Takviyelere ne kadar ihtiyacınız var ?
+        </GradientSubTitle>
         <Text className="px-1 text-mid md:px-6 lg:px-12 xl:px-36">
           Günlük aktivitemize veya spor alışkanlıklarımıza göre takviye gıdalara
           ihtiyaç duyabiliriz. Ancak takviyeler sizin durumunuz için gerçekten

@@ -7,7 +7,7 @@ import MainLayout from "./layouts/MainLayout.jsx";
 
 import Home from "./pages/Home.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
-import { Supplements, SupplementsLoader } from "./pages/Supplements.jsx";
+import { Supplements } from "./pages/Supplements.jsx";
 import ProjectAbout from "./pages/ProjectAbout.jsx";
 
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
@@ -23,7 +23,6 @@ const router = createBrowserRouter([
       {
         path: "/supplements",
         element: <Supplements />,
-        loader: SupplementsLoader,
       },
       { path: "/project-about", element: <ProjectAbout /> },
     ],

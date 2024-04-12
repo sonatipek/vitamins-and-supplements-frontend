@@ -1,65 +1,39 @@
-import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Tab } from "@headlessui/react";
-import { PillIcon, GlassWaterIcon, ListIcon, ChevronRight } from "lucide-react";
+import { PillIcon, GlassWaterIcon, ListIcon } from "lucide-react";
 
 // Assets
-import EmptyFilter from "../assets/empty_illustration.svg";
 import NoData from "../assets/no_data_illustration.svg";
 
 // Components
 import Title from "../components/ui/Title.jsx";
 import Badge from "../components/ui/Badge.jsx";
-import PreviewCard from "../components/ui/PreviewCard.jsx";
-import Modal from "../components/ui/Modal.jsx";
-import Text from "../components/ui/Text.jsx";
-import TitleWithDesc from "../components/ui/TitleWithDesc.jsx";
+import SupplementList from "../components/Supplements/SupplementList.jsx";
 
+// Data
 const tabs = [
   { icon: <ListIcon strokeWidth={1.5} />, text: "Tümü" },
   { icon: <GlassWaterIcon strokeWidth={1.5} />, text: "Supplements" },
   { icon: <PillIcon strokeWidth={1.5} />, text: "Vitamins" },
 ];
 
-const framerContainer = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.2,
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const framerItem = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-};
-
 export function Supplements() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [vitamins, setVitamins] = useState([]);
   const [supplements, setSupplements] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
 
+  // fetch Categories
   useEffect(() => {
-    fetch(
-      "https://vitamins-and-supplements.vercel.app/api/category",
-      {
-        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
-      },
-    )
+    fetch("https://vitamins-and-supplements.vercel.app/api/category", {
+      headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
+    })
       .then((response) => response.json())
       .then((json) => setCategories(json));
   }, []);
 
+  // fetch Vitamins by Selected Category
   useEffect(() => {
     fetch(
       selectedCategory
@@ -76,6 +50,7 @@ export function Supplements() {
       );
   }, [selectedCategory]);
 
+  // fetch Supplements by Selected Category
   useEffect(() => {
     fetch(
       selectedCategory
@@ -90,6 +65,7 @@ export function Supplements() {
       .then((json) => setSupplements(json));
   }, [selectedCategory]);
 
+  // Event Functions
   function searchTrigger(e) {
     e.preventDefault();
 
@@ -185,6 +161,7 @@ export function Supplements() {
           ))}
         </Tab.List>
 
+        {/* Categories */}
         <Title size="md" className="mt-6">
           Kategoriler
         </Title>
@@ -205,433 +182,17 @@ export function Supplements() {
             Filtreyi Temizle
           </button>
         </ul>
+        {/* End Categories */}
+
 
         <Tab.Panels className="mt-14">
           {/* General Tab */}
           <Tab.Panel>
             {(vitamins.length !== 0 || supplements.length !== 0) && (
               <div>
-                <TitleWithDesc
-                  title="Öneririz"
-                  desc="Öncelikli olarak tavsiye edilen takviyeler"
-                />
-                <motion.div
-                  variants={framerContainer}
-                  initial="hidden"
-                  animate="visible"
-                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                >
-                  {vitamins &&
-                    vitamins.map((value, index) => {
-                      if (value.recommendation === "Öneririz") {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      } else {
-                        let supplementSuggestions = supplements.filter(
-                          (supplement) =>
-                            supplement.recommendation === "Öneririz",
-                        );
-                        let vitaminSuggestions = vitamins.filter(
-                          (vitamin) => vitamin.recommendation === "Öneririz",
-                        );
-
-                        if (
-                          supplementSuggestions.length === 0 &&
-                          vitaminSuggestions.length === 0 &&
-                          index === 0
-                        ) {
-                          return (
-                            <motion.div
-                              key={index}
-                              className="col-span-1 mt-3"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                            >
-                              <img
-                                src={EmptyFilter}
-                                alt="Empty filter illustration"
-                                width={160}
-                                className="mx-auto"
-                              />
-                              <Text className="mt-2 font-semibold text-mid">
-                                Bu katergoride öncelikli olarak tavsiye edilen
-                                bir takviye bulunmuyor.
-                              </Text>
-                            </motion.div>
-                          );
-                        }
-                      }
-                    })}
-                  {supplements &&
-                    supplements.map((value, index) => {
-                      if (value.recommendation === "Öneririz") {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      }
-                    })}
-                </motion.div>
-
-                <TitleWithDesc
-                  title="Öncelikli Değil"
-                  desc="Öncelikli olmayan takviyeler"
-                />
-                <motion.div
-                  variants={framerContainer}
-                  initial="hidden"
-                  animate="visible"
-                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                >
-                  {supplements &&
-                    supplements.map((value, index) => {
-                      if (value.recommendation === "Öncelikli Değil") {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      } else {
-                        let supplementSuggestions = supplements.filter(
-                          (supplement) =>
-                            supplement.recommendation === "Öncelikli Değil",
-                        );
-                        let vitaminSuggestions = vitamins.filter(
-                          (vitamin) =>
-                            vitamin.recommendation === "Öncelikli Değil",
-                        );
-
-                        if (
-                          supplementSuggestions.length === 0 &&
-                          vitaminSuggestions.length === 0 &&
-                          index === 0
-                        ) {
-                          return (
-                            <motion.div
-                              key={index}
-                              className="col-span-1 mt-3"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                            >
-                              <img
-                                src={EmptyFilter}
-                                alt="Empty filter illustration"
-                                width={160}
-                                className="mx-auto"
-                              />
-                              <Text className="mt-2 font-semibold text-mid">
-                                Bu katergoride önceliksiz olarak tavsiye edilen
-                                bir takviye bulunmuyor.
-                              </Text>
-                            </motion.div>
-                          );
-                        }
-                      }
-                    })}
-                  {vitamins &&
-                    vitamins.map((value, index) => {
-                      if (value.recommendation === "Öncelikli Değil") {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      }
-                    })}
-                </motion.div>
-
-                <TitleWithDesc
-                  title="Özel Durumlarda Alınabilir"
-                  desc="Öncelikli olarak tavsiye edilmeyen, özel durumlara bağlı alınması tavsiye edilen takviyeler"
-                />
-                <motion.div
-                  variants={framerContainer}
-                  initial="hidden"
-                  animate="visible"
-                  className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                >
-                  {supplements &&
-                    supplements.map((value, index) => {
-                      if (
-                        value.recommendation === "Özel Durumlarda Alınabilir"
-                      ) {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      } else {
-                        let supplementSuggestions = supplements.filter(
-                          (supplement) =>
-                            supplement.recommendation ===
-                            "Özel Durumlarda Alınabilir",
-                        );
-                        let vitaminSuggestions = vitamins.filter(
-                          (vitamin) =>
-                            vitamin.recommendation ===
-                            "Özel Durumlarda Alınabilir",
-                        );
-
-                        if (
-                          supplementSuggestions.length === 0 &&
-                          vitaminSuggestions.length === 0 &&
-                          index === 0
-                        ) {
-                          return (
-                            <motion.div
-                              key={index}
-                              className="col-span-1 mt-3"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                            >
-                              <img
-                                src={EmptyFilter}
-                                alt="Empty filter illustration"
-                                width={160}
-                                className="mx-auto"
-                              />
-                              <Text className="mt-2 font-semibold text-mid">
-                                Bu katergoride yalnızca öncelikli durumlarda
-                                tavsiye edilen bir takviye bulunmuyor
-                              </Text>
-                            </motion.div>
-                          );
-                        }
-                      }
-                    })}
-                  {vitamins &&
-                    vitamins.map((value, index) => {
-                      if (
-                        value.recommendation === "Özel Durumlarda Alınabilir"
-                      ) {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      }
-                    })}
-                </motion.div>
+                <SupplementList data={[supplements, vitamins]} isAllTab recommendation="Öneririz"/>
+                <SupplementList data={[supplements, vitamins]} isAllTab recommendation="Öncelikli Değil"/>
+                <SupplementList data={[supplements, vitamins]} isAllTab recommendation="Özel Durumlarda Alınabilir"/>
               </div>
             )}
           </Tab.Panel>
@@ -658,263 +219,15 @@ export function Supplements() {
 
             {supplements.length !== 0 && (
               <div>
-                <TitleWithDesc
-                  title="Öneririz"
-                  desc="Öncelikli olarak tavsiye edilen supplementler"
+                <SupplementList data={supplements} recommendation="Öneririz" />
+                <SupplementList
+                  data={supplements}
+                  recommendation="Öncelikli Değil"
                 />
-                <motion.div
-                  variants={framerContainer}
-                  initial="hidden"
-                  animate="visible"
-                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                >
-                  {supplements &&
-                    supplements.map((value, index) => {
-                      if (value.recommendation === "Öneririz") {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      } else {
-                        let suggestions = supplements.filter(
-                          (supplement) =>
-                            supplement.recommendation === "Öneririz",
-                        );
-
-                        if (suggestions.length === 0 && index === 0) {
-                          return (
-                            <motion.div
-                              key={index}
-                              className="col-span-1 mt-3"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                            >
-                              <img
-                                src={EmptyFilter}
-                                alt="Empty filter illustration"
-                                width={160}
-                                className="mx-auto"
-                              />
-                              <Text className="mt-2 font-semibold text-mid">
-                                Bu katergoride öncelikli olarak tavsiye edilen
-                                bir supplement bulunmuyor.
-                              </Text>
-                            </motion.div>
-                          );
-                        }
-                      }
-                    })}
-                </motion.div>
-
-                <TitleWithDesc
-                  title="Öncelikli Değil"
-                  desc="Öncelikli olmayan supplementler"
+                <SupplementList
+                  data={supplements}
+                  recommendation="Özel Durumlarda Alınabilir"
                 />
-                <motion.div
-                  variants={framerContainer}
-                  initial="hidden"
-                  animate="visible"
-                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                >
-                  {supplements &&
-                    supplements.map((value, index) => {
-                      if (value.recommendation === "Öncelikli Değil") {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      } else {
-                        let suggestions = supplements.filter(
-                          (supplement) =>
-                            supplement.recommendation === "Öncelikli Değil",
-                        );
-
-                        if (suggestions.length === 0 && index === 0) {
-                          return (
-                            <motion.div
-                              key={index}
-                              className="col-span-1 mt-3"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                            >
-                              <img
-                                src={EmptyFilter}
-                                alt="Empty filter illustration"
-                                width={160}
-                                className="mx-auto"
-                              />
-                              <Text className="mt-2 font-semibold text-mid">
-                                Bu katergoride önceliksiz olarak tavsiye edilen
-                                bir supplement bulunmuyor.
-                              </Text>
-                            </motion.div>
-                          );
-                        }
-                      }
-                    })}
-                </motion.div>
-
-                <TitleWithDesc
-                  title="Özel Durumlarda Alınabilir"
-                  desc="Öncelikli olarak tavsiye edilmeyen, özel durumlara bağlı alınması tavsiye edilen supplementler"
-                />
-                <motion.div
-                  variants={framerContainer}
-                  initial="hidden"
-                  animate="visible"
-                  className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                >
-                  {supplements &&
-                    supplements.map((value, index) => {
-                      if (
-                        value.recommendation === "Özel Durumlarda Alınabilir"
-                      ) {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      } else {
-                        let suggestions = supplements.filter(
-                          (supplement) =>
-                            supplement.recommendation ===
-                            "Özel Durumlarda Alınabilir",
-                        );
-
-                        if (suggestions.length === 0 && index === 0) {
-                          return (
-                            <motion.div
-                              key={index}
-                              className="col-span-1 mt-3"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                            >
-                              <img
-                                src={EmptyFilter}
-                                alt="Empty filter illustration"
-                                width={160}
-                                className="mx-auto"
-                              />
-                              <Text className="mt-2 font-semibold text-mid">
-                                Bu katergoride yalnızca öncelikli durumlarda
-                                tavsiye edilen bir supplement bulunmuyor
-                              </Text>
-                            </motion.div>
-                          );
-                        }
-                      }
-                    })}
-                </motion.div>
               </div>
             )}
           </Tab.Panel>
@@ -938,265 +251,18 @@ export function Supplements() {
                 />
               </motion.div>
             )}
+
             {vitamins.length !== 0 && (
               <div>
-                <TitleWithDesc
-                  title="Öneririz"
-                  desc="Öncelikli olarak tavsiye edilen vitaminler"
+                <SupplementList data={vitamins} recommendation="Öneririz" />
+                <SupplementList
+                  data={vitamins}
+                  recommendation="Öncelikli Değil"
                 />
-                <motion.div
-                  variants={framerContainer}
-                  initial="hidden"
-                  animate="visible"
-                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                >
-                  {vitamins &&
-                    vitamins.map((value, index) => {
-                      if (value.recommendation === "Öneririz") {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      } else {
-                        let suggestions = vitamins.filter(
-                          (vitamin) => vitamin.recommendation === "Öneririz",
-                        );
-
-                        if (suggestions.length === 0 && index === 0) {
-                          return (
-                            <motion.div
-                              key={index}
-                              className="col-span-1 mt-3"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                            >
-                              <img
-                                src={EmptyFilter}
-                                alt="Empty filter illustration"
-                                width={160}
-                                className="mx-auto"
-                              />
-                              <Text className="mt-2 font-semibold text-mid">
-                                Bu katergoride öncelikli olarak tavsiye edilen
-                                bir vitamin bulunmuyor.
-                              </Text>
-                            </motion.div>
-                          );
-                        }
-                      }
-                    })}
-                </motion.div>
-
-                <TitleWithDesc
-                  title="Öncelikli Değil"
-                  desc="Öncelikli olmayan vitaminler"
+                <SupplementList
+                  data={vitamins}
+                  recommendation="Özel Durumlarda Alınabilir"
                 />
-                <motion.div
-                  variants={framerContainer}
-                  initial="hidden"
-                  animate="visible"
-                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                >
-                  {vitamins &&
-                    vitamins.map((value, index) => {
-                      if (value.recommendation === "Öncelikli Değil") {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      } else {
-                        let suggestions = vitamins.filter(
-                          (vitamin) =>
-                            vitamin.recommendation === "Öncelikli Değil",
-                        );
-
-                        if (suggestions.length === 0 && index === 0) {
-                          return (
-                            <motion.div
-                              key={index}
-                              className="col-span-1 mt-3"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                            >
-                              <img
-                                src={EmptyFilter}
-                                alt="Empty filter illustration"
-                                width={160}
-                                className="mx-auto"
-                              />
-                              <Text className="mt-2 font-semibold text-mid">
-                                Bu katergoride önceliksiz olarak tavsiye edilen
-                                bir vitamin bulunmuyor.
-                              </Text>
-                            </motion.div>
-                          );
-                        }
-                      }
-                    })}
-                </motion.div>
-
-                <TitleWithDesc
-                  title="Özel Durumlarda Alınabilir"
-                  desc="Öncelikli olarak tavsiye edilmeyen, özel durumlara bağlı alınması tavsiye edilen vitaminler"
-                />
-
-                <motion.div
-                  variants={framerContainer}
-                  initial="hidden"
-                  animate="visible"
-                  className="mb-12 mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                >
-                  {vitamins &&
-                    vitamins.map((value, index) => {
-                      if (
-                        value.recommendation === "Özel Durumlarda Alınabilir"
-                      ) {
-                        return (
-                          <PreviewCard
-                            variants={framerItem}
-                            key={index}
-                            className="flex flex-col items-start justify-between"
-                          >
-                            <div>
-                              <Text isSubtext className="font-bold !text-brand">
-                                {value.recommendation}
-                              </Text>
-                              <Title className="text-2xl font-semibold">
-                                {value.name}
-                              </Title>
-                              <Text
-                                isSubtext
-                                className="mt-2 line-clamp-2 !text-base"
-                              >
-                                {value.suggestions[0]}
-                              </Text>
-                            </div>
-
-                            <button
-                              onClick={(e) => setIsModalOpen(e.target.id)}
-                              className="group mt-4 flex items-center justify-center font-semibold !text-brand"
-                              id={value.name}
-                            >
-                              Detayları Gör
-                              <ChevronRight
-                                size={16}
-                                className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                              />
-                            </button>
-
-                            <Modal
-                              key={index}
-                              supplement={value}
-                              isOpen={isModalOpen}
-                              setIsOpen={setIsModalOpen}
-                            />
-                          </PreviewCard>
-                        );
-                      } else {
-                        let suggestions = vitamins.filter(
-                          (vitamin) =>
-                            vitamin.recommendation ===
-                            "Özel Durumlarda Alınabilir",
-                        );
-
-                        if (suggestions.length === 0 && index === 0) {
-                          return (
-                            <motion.div
-                              key={index}
-                              className="col-span-1 mt-3"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                            >
-                              <img
-                                src={EmptyFilter}
-                                alt="Empty filter illustration"
-                                width={160}
-                                className="mx-auto"
-                              />
-                              <Text className="mt-2 font-semibold text-mid">
-                                Bu katergoride yalnızca öncelikli durumlarda
-                                tavsiye edilen bir vitamin bulunmuyor
-                              </Text>
-                            </motion.div>
-                          );
-                        }
-                      }
-                    })}
-                </motion.div>
               </div>
             )}
           </Tab.Panel>
@@ -1205,25 +271,4 @@ export function Supplements() {
       </Tab.Group>
     </motion.section>
   );
-}
-
-export async function SupplementsLoader() {
-  const supplements = await axios.get(
-    "https://vitamins-and-supplements.vercel.app/api/supplement",
-    {
-      headers: {
-        "X-Auth-Token": import.meta.env.VITE_API_TOKEN,
-      },
-    },
-  );
-  const vitamins = await axios.get(
-    "https://vitamins-and-supplements.vercel.app/api/vitamin",
-    {
-      headers: {
-        "X-Auth-Token": import.meta.env.VITE_API_TOKEN,
-      },
-    },
-  );
-
-  return [...vitamins.data, ...supplements.data];
 }

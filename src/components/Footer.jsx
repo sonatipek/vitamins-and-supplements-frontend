@@ -13,11 +13,22 @@ import SonatLogoLight from "../assets/sonatipek_logo_light.svg";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { ExternalLinksContext } from "../contexts/ExternalLinksContext";
 
+// Sub Components
+function FooterLink({ link, target = "_self", type = "default" }) {
+  return (
+    <li className="mt-1 transition-colors duration-300 hover:text-dark">
+      <a target={target} href={link.href}>
+        {type === "icon" ? link.icon : link.title}
+      </a>
+    </li>
+  );
+}
+
+//* Main Component
 export default function Footer() {
   // useContexts
   const { theme } = useContext(ThemeContext);
   const { externalLinks } = useContext(ExternalLinksContext);
-
 
   // Datas
   const { navLinks } = externalLinks;
@@ -45,40 +56,21 @@ export default function Footer() {
           <ul className="*:text-light">
             <h6 className="mb-2 font-bold !text-mid">Sayfalar</h6>
             {navLinks.map((value, index) => (
-              <li
-                key={index}
-                className="mt-1 transition-colors duration-300 hover:text-dark"
-              >
-                <a href={value.href}>{value.title}</a>
-              </li>
+              <FooterLink key={index} link={value} />
             ))}
           </ul>
 
           <ul className="*:text-light">
             <h6 className="mb-2 font-bold !text-mid">İletişim</h6>
             {contactLinks.map((value, index) => (
-              <li
-                key={index}
-                className="mt-1 transition-colors duration-300 hover:text-dark"
-              >
-                <a href={value.href} target="_blank">
-                  {value.icon}
-                </a>
-              </li>
+              <FooterLink key={index} link={value} type="icon" target="_blank"/>
             ))}
           </ul>
 
           <ul className="*:text-light">
             <h6 className="mb-2 font-bold !text-mid">Bağlantılı Projeler</h6>
             {relatedProjects.map((value, index) => (
-              <li
-                key={index}
-                className="mt-1 transition-colors duration-300 hover:text-dark"
-              >
-                <a href={value.href} target="_blank">
-                  {value.title}
-                </a>
-              </li>
+              <FooterLink key={index} link={value} target="_blank"/>
             ))}
           </ul>
         </div>
