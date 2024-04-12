@@ -9,7 +9,7 @@ export default function Badge({
   return (
     <li
       className={twMerge(
-        "mx-1 my-1 inline-flex cursor-pointer rounded-full border border-gray-500/30 px-4 py-0.5 font-normal text-gray-500 transition duration-300 hover:border-brand hover:bg-brand hover:text-white",
+        "mx-1 my-1 inline-flex cursor-pointer rounded-full border border-gray-500/30 px-4 py-0.5 font-normal text-gray-500 transition duration-300 hover:border-brand",
         isSelected && "border-brand bg-brand font-medium text-white",
         className,
       )}

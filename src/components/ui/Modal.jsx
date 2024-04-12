@@ -36,7 +36,7 @@ export default function Modal({ supplement, setIsOpen, isOpen }) {
 
               <div className="mt-3 flex w-full items-center justify-start gap-2">
                 {supplement.tags.map((value, index) => (
-                  <Badge className="font-medium" key={index}><span className="before:content-['+'] before:mr-1 px-2">{value}</span></Badge>
+                  <Badge className="font-medium hover:border-gray-500/30 cursor-default" key={index}><span className="before:content-['+'] before:mr-1 px-2">{value}</span></Badge>
                 ))}
               </div>
             </div>
