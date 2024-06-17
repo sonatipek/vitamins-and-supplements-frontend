@@ -24,6 +24,36 @@ export function Supplements() {
   const [supplements, setSupplements] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [search, setSearch] = useState("")
+
+  const fetchSearchedSupplements = (search) => {
+    fetch(
+      search !== ""
+        ? "https://vitamins-and-supplements.vercel.app/api/search/vitamin?name=" + search
+        : "https://vitamins-and-supplements.vercel.app/api/vitamin",
+      {
+        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
+      },
+    )
+      .then((response) => response.json())
+      .then((json) =>
+        json.success == false ? setVitamins([]) : setVitamins(json),
+      );
+
+
+    fetch(
+      search !== ""
+        ? "https://vitamins-and-supplements.vercel.app/api/search/supplement?name=" + search
+        : "https://vitamins-and-supplements.vercel.app/api/supplement",
+      {
+        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
+      },
+    )
+      .then((response) => response.json())
+      .then((json) =>
+        json.success == false ? setSupplements([]) : setSupplements(json),
+      );
+  }
 
   // fetch Categories
   useEffect(() => {
@@ -67,64 +97,27 @@ export function Supplements() {
       .then((json) => setSupplements(json));
   }, [selectedCategory]);
 
+  // fetch supplements by search
+  useEffect(() => {
+    const searchTimeout = setTimeout(() => {
+      fetchSearchedSupplements(search)
+    }, 500)
+  
+    return () => {
+      clearTimeout(searchTimeout)
+    }
+  }, [search])
+  
+
   // Event Functions
   function categoryClickHandler(element) {
     setSelectedCategory(element.innerHTML);
-    document.querySelector("input").value = ""; //clear if the search field is full when a category is selected
+    setSearch("")
   }
 
-  function searchTrigger(e) {
-    e.preventDefault();
-
-    fetch(
-      e.target.children[0].value !== ""
-        ? "https://vitamins-and-supplements.vercel.app/api/search/vitamin?name=" +
-            e.target.children[0].value
-        : "https://vitamins-and-supplements.vercel.app/api/vitamin",
-      {
-        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
-      },
-    )
-      .then((response) => response.json())
-      .then((json) =>
-        json.success == false ? setVitamins([]) : setVitamins(json),
-      );
-
-    fetch(
-      e.target.children[0].value !== ""
-        ? "https://vitamins-and-supplements.vercel.app/api/search/supplement?name=" +
-            e.target.children[0].value
-        : "https://vitamins-and-supplements.vercel.app/api/supplement",
-      {
-        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
-      },
-    )
-      .then((response) => response.json())
-      .then((json) =>
-        json.success == false ? setSupplements([]) : setSupplements(json),
-      );
-  }
-
-  function searchKeyUpTrigger(e) {
-    setSelectedCategory(); //if there is a category selected when the search state starts, cancel it
-
-    if (e.target.value === "") {
-      fetch("https://vitamins-and-supplements.vercel.app/api/supplement", {
-        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
-      })
-        .then((response) => response.json())
-        .then((json) =>
-          json.success == false ? setSupplements([]) : setSupplements(json),
-        );
-
-      fetch("https://vitamins-and-supplements.vercel.app/api/vitamin", {
-        headers: { "X-Auth-Token": import.meta.env.VITE_API_TOKEN },
-      })
-        .then((response) => response.json())
-        .then((json) =>
-          json.success == false ? setVitamins([]) : setVitamins(json),
-        );
-    }
+  function clearFilterHandler() {
+    setSelectedCategory();
+    setSearch("")
   }
 
   return (
@@ -133,24 +126,17 @@ export function Supplements() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      <form
-        action="#"
+      <div
         className="mb-14 mt-28 flex items-center justify-center px-6 lg:px-56"
-        onSubmit={(e) => searchTrigger(e)}
       >
         <input
           type="text"
-          className="w-full rounded-l-md border border-darkest bg-transparent px-3 py-2 text-darkest placeholder:text-mid focus:outline-none focus:ring-0 dark:border-white dark:text-white"
+          className="w-full rounded-md border border-darkest bg-transparent px-3 py-2 text-darkest placeholder:text-mid focus:outline-none focus:ring-0 dark:border-white dark:text-white"
           placeholder="Supplement Ara"
-          onKeyUp={(e) => searchKeyUpTrigger(e)}
+          value={search}
+          onChange={e => setSearch(e.target.value)}
         />
-        <button
-          type="submit"
-          className="rounded-r-md border border-darkest bg-transparent bg-white px-3 py-2 font-medium text-dark dark:border-white"
-        >
-          Ara
-        </button>
-      </form>
+      </div>
       <Tab.Group>
         <Tab.List className="flex gap-5 overflow-x-auto border-b border-light dark:border-dark">
           {tabs.map((value, index) => (
@@ -190,7 +176,7 @@ export function Supplements() {
               ))}
               <button
                 className="ml-6 text-brand hover:text-brand/80"
-                onClick={() => setSelectedCategory()}
+                onClick={clearFilterHandler}
               >
                 Filtreyi Temizle
               </button>
