@@ -31,6 +31,7 @@ On the back-end side, I gained skills in writing RESTful APIs, and it was also u
 - Dynamic content with information from the service with RESTful API
 - Simple interface supported by animations
 - Basic CRUD (Create, Read, Update, Delete) operations for backend service.
+- Debouncing Technique
 
 ![Vitamins & Supplements Listing Page](https://github.com/sonatipek/vitamins-and-supplements-frontend/assets/80075444/60c7a143-446f-4532-a16d-f5e2207f3009)
 
